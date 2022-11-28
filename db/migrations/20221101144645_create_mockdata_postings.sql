@@ -1,0 +1,221 @@
+-- migrate:up
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (7, 1, '나는 사자다','안녕하세요 사자입니다.', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (3, 1, '나는 호랑이다','안녕하세요 호랑이입니다', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (8, 1, '나는 앵무새다', '안녕하세요 앵무새입니다.', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (12, 1, '나는 박수호다', '안녕하세요 박수호입니다', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (12, 1, '나는 한혜선이다', '안녕하세요 한혜선입니다', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (7, 1, '나는 송인찬이다', '안녕하세요 송인찬입니다', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (4, 1, '나는 코딩이다', '코딩입니다 반갑습니다', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (5, 1, '나는 9번이다','안녕하세요 9번입니다', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (7, 1, '나는 10번이다', '안녕하세요 10번입니다.', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (3, 1, '나는 11번이다.', '안녕하세요 11번입니다.', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (10, 1, '어제 밥을 먹었어요', '참 맛있었어요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (8, 1, '오늘도 밥을 먹었어요', '오늘은 맛없었어요', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (1, 1, '짤방 사진입니다', '그냥 짤방입니다', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (12, 1, '15', '저는 15번글이에요 끝내주죠?!', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (1, 2, '18', '저는 사실 17번이에요, 끝내주죠?', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (8, 2, 'NO.poison', '저는 향수입니다', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (1, 2, '안녕하세요 첫 포스팅입니다','저는 첫 포스팅의 내용이죠', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (6, 2, '사실 제가 첫 포스팅이랍니다','저도 첫 포스팅의 내용이랍니다', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (8, 2, 'simple is best','yeah', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (13, 2, '오라클 사용해보셨나요?','사실 저는 mysql 사용자입니다.', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (12, 2, '이게 바로 포토폴리오!','와 진짜 잘만들었네요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (8, 2, '저 팔로우 해주실 분 계신가요?','맞팔로우 환영', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (4, 2, '이야 이거보세요','우와..', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (12, 2, '이제 4개만 더 만들면 돼요','야호', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (5, 3, '첫 팀프로젝트 하시느라 고생하셨습니다.','이제 시작입니다 여러분', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (9, 3, '잠 못주무신 분들','푹 주무세요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (11, 3, '사실 더 남았어요','여기에 하고싶은말 써도 되나요?', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (4, 3, '안녕하세요 999번입니다.','바쁘네요', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (1, 3, '고양이.jpg','사실 고양이 아님', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (12, 3, '강아지.png','저 고양이 키워요', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (3, 3, '여기에 쓰면 이게 제목으로 들어가는거죠?','여긴 내용이네요?', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (13, 3, '안녕하세요 감사해요 잘있어요','다시 만나요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (3, 3, '아침해가 뜨면','매일 같은 사람들과', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (5, 3, '또다시 새로운 하루를','시작해', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (7, 4, '음..제목이겠죠?','내용이네요!', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (4, 4, '이거 작성하고 있어요','데이터가 많네요', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (6, 4, '하고싶은말 쓰고있습니다','이렇게 작성하면 되는거겠죠?', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (8, 4, '안녕하세요 얼룩말입니다','반가워요!', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (3, 4, 'Hello, world','amazing!', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (7, 4, '마켓컬리 편하네요','좋은것같아요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (1, 4, '네이버 짱','입사시켜주세요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (5, 4, '헤드폰 추천좀요', '헤드폰은 다이소가 제일 좋아요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (5, 4, '샤오롱빠 맛있어요', '이마트에서 주문하세요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (11, 4, '나 오늘 뭐 바뀐거 없어?', '드디어 시작되었다. 그들의 전쟁이', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (6, 4, '오빠 자?!', '오빠 할말이 있어. 전화 줘', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (11, 4, '오빠 뭐해?', '농사 아닙니다.', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (11, 4, '밥은 먹고 다니냐', '난 잘 먹고 다녀요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (4, 4, '민선아 잘 지내니?', '민선아 그땐 내가 미안했어', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (1, 4, '자기야 자?', '자기야 나야... 잘 지내지?', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (11, 4, '여보 돌아와줘', '여보 내가 잘못했어', 2);
+
+
+
+
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (7, 5, '나는 사자다','안녕하세요 사자입니다.', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (3, 6, '나는 호랑이다','안녕하세요 호랑이입니다', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (8, 7, '나는 앵무새다', '안녕하세요 앵무새입니다.', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (12, 8, '나는 박수호다', '안녕하세요 박수호입니다', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (12, 9, '나는 한혜선이다', '안녕하세요 한혜선입니다', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (7, 5, '나는 송인찬이다', '안녕하세요 송인찬입니다', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (4, 6, '나는 코딩이다', '안녕하세요 김코딩입니다.', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (5, 7, '나는 9번이다','안녕하세요 9번입니다', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (7, 8, '나는 10번이다', '안녕하세요 10번입니다.', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (3, 9, '나는 11번이다.', '안녕하세요 11번입니다.', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (10, 5, '어제 밥을 먹었어요', '참 맛있었어요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (8, 6, '오늘도 밥을 먹었어요', '오늘은 맛없었어요', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (1, 7, '짤방 사진입니다', '그냥 짤방입니다', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (12, 8, '15', '저는 15번글이에요 끝내주죠?!', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (1, 9, '18', '저는 사실 17번이에요, 끝내주죠? ', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (8, 5, 'NO.poison', '저는 향수입니다', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (1, 6, '안녕하세요 첫 포스팅입니다','저는 첫 포스팅의 내용이죠', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (6, 7, '사실 제가 첫 포스팅이랍니다','저도 첫 포스팅의 내용이랍니다', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (8, 8, 'simple is best','yeah', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (13, 9, '오라클 사용해보셨나요?','사실 저는 mysql 사용자입니다.', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (12, 5, '이게 바로 포토폴리오!','와 진짜 잘만들었네요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (8, 6, '저 팔로우 해주실 분 계신가요?','맞팔로우 환영', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (4, 7, '이야 이거보세요','우와..', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (12, 8, '이제 4개만 더 만들면 돼요','야호', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (5, 9, '첫 팀프로젝트 하시느라 고생하셨습니다.','이제 시작입니다 여러분', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (9, 5, '잠 못주무신 분들','푹 주무세요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (11, 6, '사실 더 남았어요','여기에 하고싶은말 써도 되나요?', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (4, 7, '안녕하세요 999번입니다.','바쁘네요', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (1, 8, '고양이.jpg','사실 고양이 아님', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (12, 9, '강아지.png','저 고양이 키워요', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (3, 5, '여기에 쓰면 이게 제목으로 들어가는거죠?','여긴 내용이네요?', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (13, 8, '안녕하세요 감사해요 잘있어요','다시 만나요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (3, 7, '아침해가 뜨면','매일 같은 사람들과', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (5, 6, '또다시 새로운 하루를','시작해', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (7, 5, '음..제목이겠죠?','내용이네요!', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (4, 9, '이거 작성하고 있어요','데이터가 많네요', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (6, 8, '하고싶은말 쓰고있습니다','이렇게 작성하면 되는거겠죠?', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (8, 7, '안녕하세요 얼룩말입니다','반가워요!', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (3, 6, 'Hello, world','amazing!', 1);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (7, 5, '마켓컬리 편하네요','좋은것같아요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (1, 9, '네이버 짱','입사시켜주세요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (5, 8, '헤드폰 추천좀요', '헤드폰은 다이소가 제일 좋아요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (5, 7, '샤오롱빠 맛있어요', '이마트에서 주문하세요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (11, 6, '나 오늘 뭐 바뀐거 없어?', '드디어 시작되었다. 그들의 전쟁이', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (6, 5, '오빠 자?!', '오빠 할말이 있어. 전화 줘', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (11, 9, '오빠 뭐해?', '농사 아닙니다.', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (11, 8, '밥은 먹고 다니냐', '난 잘 먹고 다녀요', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (4, 7, '민선아 잘 지내니?', '민선아 그땐 내가 미안했어', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (1, 6, '자기야 자?', '자기야 나야... 잘 지내지?', 2);
+insert into Works_Posting (user_id, category_id, title, content, status_id) values (11, 5, '여보 돌아와줘', '여보 내가 잘못했어', 2);
+
+
+
+
+
+
+
+
+
+insert into upload_file (posting_id, file_sort_id, upload_url) values (1, 1, 'https://images.unsplash.com/photo-1574015974293-817f0ebebb74?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTF8fGZhc2hpb258ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (2, 1, 'https://images.unsplash.com/photo-1627483297929-37f416fec7cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8MXx8ZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (3, 1, 'https://plus.unsplash.com/premium_photo-1664358305566-ea99eebb1d0e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDl8fGZhc2hpb258ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60
+');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (4, 1, 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (5, 1, 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8ZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (6, 1, 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (7, 1, 'https://images.unsplash.com/photo-1627483262112-039e9a0a0f16?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8OHx8ZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (8, 1, 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8ZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (9, 1, 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGZhc2hpb258ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (10, 1, 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGZhc2hpb258ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (11, 1, 'https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGZhc2hpb258ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (12, 1, 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGZhc2hpb258ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (13, 1, 'https://images.unsplash.com/photo-1647891941746-fe1d53ddc7a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8MTV8fGZhc2hpb258ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (14, 1, 'https://plus.unsplash.com/premium_photo-1661281325589-b90320d7b862?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGZhc2hpb258ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (15, 1, 'https://images.unsplash.com/photo-1550537687-c91072c4792d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (16, 1, 'https://images.unsplash.com/photo-1558244661-d248897f7bc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (17, 1, 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (18, 1, 'https://images.unsplash.com/photo-1551893478-d726eaf0442c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (19, 1, 'https://images.unsplash.com/photo-1607457561901-e6ec3a6d16cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (20, 1, 'https://images.unsplash.com/photo-1559644705-15d30e582900?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1019&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (21, 1, 'https://images.unsplash.com/photo-1553526777-5ffa3b3248d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (22, 1, 'https://images.unsplash.com/photo-1593819467694-f0bd57744f14?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (23, 1, 'https://images.unsplash.com/photo-1458682625221-3a45f8a844c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (24, 1, 'https://images.unsplash.com/photo-1611063158871-7dd3ed4a2ac8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (25, 1, 'https://images.unsplash.com/photo-1657214059212-104dac959c56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8MXx8dHJhdmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (26, 1, 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8dHJhdmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (27, 1, 'https://images.unsplash.com/photo-1500835556837-99ac94a94552?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dHJhdmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (28, 1, 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dHJhdmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (29, 1, 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8dHJhdmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (30, 1, 'https://images.unsplash.com/photo-1530521954074-e64f6810b32d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dHJhdmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (31, 1, 'https://images.unsplash.com/photo-1504150558240-0b4fd8946624?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHRyYXZlbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (32, 1, 'https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8dHJhdmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (33, 1, 'https://plus.unsplash.com/premium_photo-1663054480506-583f20275a34?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHRyYXZlbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (34, 1, 'https://images.unsplash.com/photo-1488085061387-422e29b40080?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHRyYXZlbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (35, 1, 'https://plus.unsplash.com/premium_photo-1666536058805-d586cbf748ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YW5pbWFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (36, 1, 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YW5pbWFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (37, 1, 'https://images.unsplash.com/photo-1602491453631-e2a5ad90a131?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8YW5pbWFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (38, 1, 'https://images.unsplash.com/photo-1555169062-013468b47731?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YW5pbWFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (39, 1, 'https://images.unsplash.com/photo-1484406566174-9da000fda645?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YW5pbWFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (40, 1, 'https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YW5pbWFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (41, 1, 'https://images.unsplash.com/photo-1456926631375-92c8ce872def?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (42, 1, 'https://plus.unsplash.com/premium_photo-1664287370462-7775287c0e51?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (43, 1, 'https://images.unsplash.com/photo-1543946207-39bd91e70ca7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (44, 1, 'https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (45, 1, 'https://images.unsplash.com/photo-1497752531616-c3afd9760a11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (46, 1, 'https://images.unsplash.com/photo-1470093851219-69951fcbb533?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (47, 1, 'https://plus.unsplash.com/premium_photo-1664286885820-fc4f47d5e0a4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (48, 1, 'https://images.unsplash.com/photo-1547721064-da6cfb341d50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (49, 1, 'https://images.unsplash.com/photo-1581300134629-4c3a06a31948?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (50, 1, 'https://images.unsplash.com/photo-1604336755604-96ee6fa9f3f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+
+
+insert into upload_file (posting_id, file_sort_id, upload_url) values (51, 1, 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (52, 1, 'https://images.unsplash.com/photo-1627483297929-37f416fec7cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8MXx8ZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (53, 1, 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (54, 1, 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (55, 1, 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8ZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (56, 1, 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (57, 1, 'https://images.unsplash.com/photo-1627483262112-039e9a0a0f16?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8OHx8ZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (58, 1, 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8ZmFzaGlvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (59, 1, 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGZhc2hpb258ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (60, 1, 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGZhc2hpb258ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (61, 1, 'https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGZhc2hpb258ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (62, 1, 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGZhc2hpb258ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (63, 1, 'https://images.unsplash.com/photo-1647891941746-fe1d53ddc7a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8MTV8fGZhc2hpb258ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (64, 1, 'https://plus.unsplash.com/premium_photo-1661281325589-b90320d7b862?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGZhc2hpb258ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (65, 1, 'https://images.unsplash.com/photo-1550537687-c91072c4792d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (66, 1, 'https://images.unsplash.com/photo-1558244661-d248897f7bc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (67, 1, 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (68, 1, 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (69, 1, 'https://images.unsplash.com/photo-1607457561901-e6ec3a6d16cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (70, 1, 'https://images.unsplash.com/photo-1559644705-15d30e582900?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1019&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (71, 1, 'https://images.unsplash.com/photo-1553526777-5ffa3b3248d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (72, 1, 'https://images.unsplash.com/photo-1559759708-d6e99b50f0e9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (73, 1, 'https://images.unsplash.com/photo-1458682625221-3a45f8a844c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (74, 1, 'https://images.unsplash.com/photo-1553532434-5ab5b6b84993?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (75, 1, 'https://images.unsplash.com/photo-1657214059212-104dac959c56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8MXx8dHJhdmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (76, 1, 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8dHJhdmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (77, 1, 'https://images.unsplash.com/photo-1500835556837-99ac94a94552?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dHJhdmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (78, 1, 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dHJhdmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (79, 1, 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8dHJhdmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (80, 1, 'https://images.unsplash.com/photo-1530521954074-e64f6810b32d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dHJhdmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (81, 1, 'https://images.unsplash.com/photo-1504150558240-0b4fd8946624?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHRyYXZlbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (82, 1, 'https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8dHJhdmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (83, 1, 'https://plus.unsplash.com/premium_photo-1663054480506-583f20275a34?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHRyYXZlbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (84, 1, 'https://images.unsplash.com/photo-1488085061387-422e29b40080?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHRyYXZlbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (85, 1, 'https://plus.unsplash.com/premium_photo-1666536058805-d586cbf748ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YW5pbWFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (86, 1, 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YW5pbWFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (87, 1, 'https://images.unsplash.com/photo-1602491453631-e2a5ad90a131?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8YW5pbWFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (88, 1, 'https://images.unsplash.com/photo-1555169062-013468b47731?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YW5pbWFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (89, 1, 'https://images.unsplash.com/photo-1484406566174-9da000fda645?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YW5pbWFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (90, 1, 'https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YW5pbWFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (91, 1, 'https://images.unsplash.com/photo-1456926631375-92c8ce872def?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (92, 1, 'https://plus.unsplash.com/premium_photo-1664287370462-7775287c0e51?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (93, 1, 'https://images.unsplash.com/photo-1543946207-39bd91e70ca7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (94, 1, 'https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (95, 1, 'https://images.unsplash.com/photo-1497752531616-c3afd9760a11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (96, 1, 'https://images.unsplash.com/photo-1470093851219-69951fcbb533?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (97, 1, 'https://plus.unsplash.com/premium_photo-1664286885820-fc4f47d5e0a4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (98, 1, 'https://images.unsplash.com/photo-1547721064-da6cfb341d50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (99, 1, 'https://images.unsplash.com/photo-1581300134629-4c3a06a31948?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+insert into upload_file (posting_id, file_sort_id, upload_url) values (100, 1, 'https://images.unsplash.com/photo-1604336755604-96ee6fa9f3f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGFuaW1hbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60');
+
+
+-- migrate:down
+
