@@ -1,7 +1,7 @@
 # 221129 photofolio renewal project / edited by inchan
 schema.sql
 package-lock.json
-
+/.idea
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,linux,visualstudiocode,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,linux,visualstudiocode,node
