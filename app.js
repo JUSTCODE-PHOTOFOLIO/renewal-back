@@ -3,7 +3,7 @@ const cors = require('cors');
 const routes = require('./routes');
 const multer = require('multer');
 const morgan = require('morgan');
-// const { morganCustomFormat } = require('./utils/util');
+const { morganCustomFormat } = require('./utils/util');
 
 let corsOptions = {
   origin: '*',
@@ -13,7 +13,7 @@ let corsOptions = {
 const createApp = () => {
   const app = express();
   app.use(cors(corsOptions));
-  app.use(morgan('combine'));
+  app.use(morgan(morganCustomFormat));
 
   app.use(express.json());
   app.use(routes);
