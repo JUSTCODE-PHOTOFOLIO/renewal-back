@@ -1,24 +1,24 @@
 const express = require('express');
 const cors = require('cors');
 const routes = require('./routes');
-const multer = require('multer');;
+const multer = require('multer');
 const morgan = require('morgan');
+// const { morganCustomFormat } = require('./utils/util');
 
-
-var corsOptions = {
+let corsOptions = {
   origin: '*',
   optionsSuccessStatus: 200,
 };
 
-
 const createApp = () => {
   const app = express();
   app.use(cors(corsOptions));
+  app.use(morgan('combine'));
 
   app.use(express.json());
   app.use(routes);
+
   app.use(multer);
-  app.use(morgan('combined'));
 
   app.use((err, req, res, next) => {
     const { status, message } = err;

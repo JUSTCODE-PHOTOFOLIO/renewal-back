@@ -1,14 +1,4 @@
-const { DataSource } = require('typeorm');
-const myDataSource = new DataSource({
-  type: process.env.TYPEORM_CONNECTION,
-  host: process.env.TYPEORM_HOST,
-  port: process.env.TYPEORM_PORT,
-  username: process.env.TYPEORM_USERNAME,
-  password: process.env.TYPEORM_PASSWORD,
-  database: process.env.TYPEORM_DATABASE,
-});
-
-myDataSource.initialize();
+const myDataSource = require('.');
 
 // 카테고리별 피드 리스트 - 1.fashion 2.pattern 3.travel 4.animal
 const categoryList = async categoryName => {
