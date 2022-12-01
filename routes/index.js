@@ -15,14 +15,14 @@ const commentRouter = require('./commentRouter');
 const uploadRouter = require('./uploadRouter');
 
 router.use('/user', userRouter);
-router.use('/works', workRouter);
-router.use('/feeds', feedRouter);
-router.use('/category', categoryRouter);
-router.use('/searchlist', searchListRouter);
+router.use('/works', workRouter); // TODO Refactoring - Inchan
+router.use('/feeds', feedRouter); // TODO Refactoring - Inchan
+router.use('/category', categoryRouter); // TODO Refactoring - Inchan
+router.use('/searchlist', searchListRouter); // TODO Refactoring - Inchan
 router.use('/upload', uploadRouter);
-router.use('/sympathy', sympathyRouter);
-router.use('/follow', followRouter);
-router.use('/channel', channelRouter);
+router.use('/sympathy', sympathyRouter); // TODO Refactoring - Inchan
+router.use('/follow', followRouter); // TODO Refactoring - Inchan
+router.use('/channel', channelRouter); // TODO Refactoring - Inchan
 router.use('/comments', commentRouter);
 
 module.exports = router;

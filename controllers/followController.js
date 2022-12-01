@@ -4,7 +4,7 @@ const followService = require('../services/followService');
 const following = async (req, res) => {
   try {
     const { following_id } = req.body;
-    user_id = req.user_id;
+    const user_id = req.user_id;
     const result = await followService.following(following_id, user_id);
     res.status(200).json(result);
   } catch (err) {
@@ -17,7 +17,7 @@ const following = async (req, res) => {
 const followingCancel = async (req, res) => {
   try {
     const { following_id } = req.body;
-    user_id = req.user_id;
+    const user_id = req.user_id;
     const result = await followService.followingCancel(following_id, user_id);
     res.status(200).json(result);
   } catch (err) {

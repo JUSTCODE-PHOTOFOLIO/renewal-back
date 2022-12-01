@@ -5,14 +5,24 @@ const following = async (following_id, user_id) => {
   try {
     const follow = await myDataSource.query(
       `
-    INSERT into Follow (following_id, follower_id) 
-    values ('${following_id}', '${user_id}') 
+      INSERT
+        INTO
+        Follow (following_id,
+        follower_id)
+      VALUES 
+        ('${following_id}',
+        '${user_id}')
     `
     );
     const followingResult = await myDataSource.query(
       `
-    SELECT * from Follow f 
-    WHERE following_id = '${following_id}' and follower_id = '${user_id}'
+      SELECT
+        *
+      FROM
+        Follow f
+      WHERE
+        following_id = '${following_id}'
+        AND follower_id = '${user_id}'
     `
     );
     let result = { followingResult };
@@ -28,14 +38,23 @@ const followingCancel = async (following_id, user_id) => {
   try {
     const deleteFollow = await myDataSource.query(
       `
-    DELETE from Follow 
-    WHERE following_id = '${following_id}' and follower_id = '${user_id}'
+      DELETE
+      FROM
+        Follow
+      WHERE
+        following_id = '${following_id}'
+        AND follower_id = '${user_id}'
     `
     );
     const deleteResult = await myDataSource.query(
       `
-    SELECT count(*) from Follow f 
-    WHERE following_id = '${following_id}' and follower_id = '${user_id}'
+      SELECT
+        count(*)
+      FROM
+        Follow f
+      WHERE
+        following_id = '${following_id}'
+        AND follower_id = '${user_id}'
     `
     );
     let result = { deleteResult };

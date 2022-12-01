@@ -7,8 +7,8 @@ const workController = require('../controllers/workController');
 
 // 카테고리별 총 게시물 수 + 최신 feed list
 router.get('', workController.worksList);
-router.get('/:sort', workController.worksList); // sort 종류 ('recommendpoint', 'sympathycnt')
 router.get('/feed/:id', workController.feed);
 router.get('/feed/:id/followcheck', validateToken, workController.followCheck); //토큰 필요
+router.get('/:sort', workController.worksList); // sort 종류 ('recommendpoint', 'sympathycnt')
 
 module.exports = router;
