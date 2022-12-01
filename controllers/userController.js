@@ -1,4 +1,4 @@
-const { json } = require('express');
+// const { json } = require('express');
 const jwt = require('jsonwebtoken');
 const userService = require('../services/userService');
 
@@ -14,10 +14,7 @@ const createUser = async (req, res) => {
       email,
     } = req.body;
 
-    let profile_image = '';
-    if (req.file !== undefined) {
-      profile_image = req.file.location;
-    }
+    const profile_image = req.file.location;
 
     const REQUIRE_KEYS = [
       login_id,
@@ -82,7 +79,7 @@ const loginUser = async (req, res) => {
       },
       process.env.SECRET_KEY,
       {
-        expiresIn: '300m', // 만료시간 30분
+        expiresIn: '3000000000000000000m', // 만료시간 30분
         issuer: '토큰발급자',
       }
     );
