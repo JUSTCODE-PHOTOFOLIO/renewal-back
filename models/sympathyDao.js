@@ -143,9 +143,10 @@ const sympathyCancel = async (posting_id, user_id) => {
       FROM
         Works_Sympathy_Count
       WHERE
-        user_id = '${user_id}'
-        AND posting_id = '${posting_id}'
-    `
+        user_id = ?
+        AND posting_id = ?
+    `,
+    [user_id, posting_id]
   );
   const checkSympathy = await myDataSource.query(
     `
@@ -154,9 +155,10 @@ const sympathyCancel = async (posting_id, user_id) => {
       FROM
         Works_Sympathy_Count wsc
       WHERE
-        posting_id = '${posting_id}'
-        AND user_id = '${user_id}'
-    `
+        posting_id = ?
+        AND user_id = ?
+    `,
+    [posting_id, user_id]
   );
   return { checkSympathy };
 };

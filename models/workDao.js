@@ -117,8 +117,9 @@ const worksList = async sort => {
           ON a.id = wp.id 
         LEFT JOIN tables2 b 
           ON b.id = wp.id 
-        ORDER BY ${sort} DESC 
-        `
+        ORDER BY ? DESC 
+        `,
+        [sort]
       );
       let result = { categorySortCountList, worksFeedList };
       return result;
@@ -145,10 +146,11 @@ const followCheck = async (id, user_id) => {
           LEFT JOIN Works_Posting wp ON
             wp.user_id = f.following_id
           WHERE
-            wp.id = '${id}'
-            AND follower_id = '${user_id}'
+            wp.id = ?
+            AND follower_id = ?
         ) AS success
-    `
+    `,
+        [id, user_id]
       )
       .then(value => {
         const [item] = value;
@@ -183,9 +185,10 @@ const feed = async id => {
       LEFT JOIN file_sort fs ON
         uf.file_sort_id = fs.id
       WHERE
-        uf.posting_id = '${id}'
+        uf.posting_id = ?
         AND uf.file_sort_id = 1
-      `
+      `,
+      [id]
     );
     feedImgArr = [...feedImgArr].map(item => {
       return {
@@ -228,8 +231,9 @@ const feed = async id => {
       LEFT JOIN Works_tag_names wtn ON
         wpt.tag_id = wtn.id
       WHERE
-        wp.id = '${id}'
-      `
+        wp.id = ?
+      `,
+      [id]
     );
 
     feedWithTags = [...feedWithTags].map(item => {
@@ -255,10 +259,11 @@ const feed = async id => {
       LEFT JOIN Users u ON
         u.id = c.user_id
       WHERE
-        wp.id = '${id}'
+        wp.id = ?
       ORDER BY
         created_at ASC      
-      `
+      `,
+      [id]
     );
 
     // feed 글쓴이의 다른 작품들
@@ -293,7 +298,7 @@ const feed = async id => {
         FROM
           Works_Posting wp
         WHERE
-          wp.id = '${id}'
+          wp.id = ?
       )
 
       SELECT
@@ -318,8 +323,9 @@ const feed = async id => {
         b.user_id = wp.user_id
       WHERE
         wp.user_id = b.user_id
-        AND NOT wp.id = '${id}'
-      `
+        AND NOT wp.id = ?
+      `,
+      [id, id]
     );
     moreFeedinfo = [...moreFeedinfo].map(item => {
       return {
@@ -360,7 +366,7 @@ const feed = async id => {
           LEFT JOIN Users u2 ON
             u2.id = f.following_id
           WHERE
-            wp.id = '${id}'
+            wp.id = ?
         ) AS following_cnt,
         (
           SELECT
@@ -381,7 +387,7 @@ const feed = async id => {
           LEFT JOIN Users u2 ON
             u2.id = f.following_id
           WHERE
-            wp.id = '${id}'
+            wp.id = ?
         ) AS following_list
       FROM
         Works_Posting wp
@@ -392,8 +398,9 @@ const feed = async id => {
       LEFT JOIN Users u2 ON
         u2.id = f.follower_id
       WHERE
-        wp.id = '${id}'
-      `
+        wp.id = ?
+      `,
+      [id, id, id]
     );
 
     writerInfo = [...writerInfo].map(item => {
@@ -418,8 +425,9 @@ const feed = async id => {
       LEFT JOIN Works_Posting wp ON
         wsc.posting_id = wp.id
       WHERE
-        wp.id = '${id}'
-      `
+        wp.id = ?
+      `,
+      [id]
     );
 
     // feed + 공감별 개수
@@ -439,7 +447,7 @@ const feed = async id => {
         LEFT JOIN Works_Posting wp ON
           wsc.posting_id = wp.id
         WHERE
-          wp.id = '${id}'
+          wp.id = ?
         GROUP BY
           ws.sympathy_sort
       )
@@ -452,7 +460,8 @@ const feed = async id => {
         Works_Sympathy ws
       LEFT JOIN tables a ON
         a.sympathy_sort = ws.sympathy_sort
-      `
+      `,
+      [id]
     );
 
     let anotherFeedList = await myDataSource.query(
@@ -525,10 +534,11 @@ const feed = async id => {
       LEFT JOIN tables2 b ON
         b.id = wp.id
       WHERE
-        wp.id NOT IN ("${id}")
+        wp.id NOT IN (" ? ")
       ORDER BY
         wp.created_at DESC
-      `
+      `,
+      [id]
     );
 
     // 조회수 카운팅 (IP주소나 시간만료 같은 장치는 아직 없음.)
@@ -539,8 +549,9 @@ const feed = async id => {
       SET
         view_count = view_count + 1
       WHERE
-        id = '${id}'
-      `
+        id = ?
+      `,
+      [id]
     );
 
     let result = {
