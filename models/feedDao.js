@@ -2,10 +2,8 @@ const myDataSource = require('.');
 
 // 최신 feed list
 const feedsList = async user_id => {
-  try {
-    console.log('user_id = ', user_id);
-    const feedsList = await myDataSource.query(
-      `
+  const feedsList = await myDataSource.query(
+    `
       WITH tables1 AS (
         SELECT
           wp.id AS id,
@@ -61,7 +59,7 @@ const feedsList = async user_id => {
         FROM
           Follow f
         WHERE
-          f.follower_id = '${user_id}'
+          f.follower_id = ( ? )
       )
       
       SELECT
@@ -88,14 +86,10 @@ const feedsList = async user_id => {
         d.follower_id = u.id
       ORDER BY
         wp.created_at DESC
-      `
-    );
-    let result = { feedsList };
-    return result;
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+      `,
+    [user_id]
+  );
+  return { feedsList };
 };
 
 module.exports = { feedsList };

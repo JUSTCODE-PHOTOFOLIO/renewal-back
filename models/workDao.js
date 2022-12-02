@@ -153,7 +153,7 @@ const followCheck = async (id, user_id) => {
       .then(value => {
         const [item] = value;
         return {
-          success: item.success == 1,
+          follow_check: item.success == 1,
         };
       });
   } catch (err) {
@@ -198,7 +198,7 @@ const feed = async id => {
     let feedWithTags = await myDataSource.query(
       `
       SELECT
-        wp.id,
+        wp.id, 
         wp.user_id,
         u.kor_name,
         wp.title,
@@ -244,7 +244,7 @@ const feed = async id => {
       SELECT
         c.id,
         c.user_id,
-        u.kor_name AS nickname,
+        u.kor_name,
         c.comment,
         SUBSTRING(c.created_at, 1, 10) AS created_at ,
         SUBSTRING(c.updated_at, 1, 10) AS updated_at

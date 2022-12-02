@@ -72,62 +72,64 @@ const findQuerySearchResult = `
 
 // 검색어 입력시 + 카테고리 설정
 const searchList = async (query, category_id) => {
-  try {
-    if (!category_id) {
-      const resultCount = await myDataSource.query(
-        `
+  // TODO 서비스단으로 올리기!!
+  if (!category_id) {
+    const resultCount = await myDataSource.query(
+      `
         SELECT 
           COUNT(*) result_cnt
         FROM 
           Works_Posting wp  
         WHERE 
-          wp.title  LIKE "%${query}%" OR wp.content LIKE "%${query}%" 
+          wp.title  LIKE CONCAT('%', ?, '%') 
+           OR wp.content LIKE CONCAT('%', ?, '%') 
         ORDER BY 
           wp.created_at DESC 
-        `
-      );
+        `,
+      [query, query]
+    );
 
-      const searchResult = await myDataSource.query(
-        `
+    const searchResult = await myDataSource.query(
+      `
        ${findQuerySearchResult}
         WHERE 
-          wp.title LIKE '%${query}%' OR wp.content LIKE '%${query}%'
+          wp.title LIKE CONCAT('%', ?, '%') 
+            OR wp.content LIKE CONCAT('%', ?, '%')
         ORDER BY 
           wp.created_at DESC 
-        `
-      );
-      let result = { resultCount, searchResult };
-      return result;
-    } else {
-      const resultCount = await myDataSource.query(
-        `
+        `,
+      [query, query]
+    );
+    return { resultCount, searchResult };
+  } else {
+    // TODO AND가 제대로 안먹히는듯, 손봐야 함
+    const resultCount = await myDataSource.query(
+      `
         SELECT 
           COUNT(*) result_cnt
         FROM 
           Works_Posting wp  
         WHERE 
-          wp.title LIKE "%${query}%" OR wp.content LIKE "%${query}%" AND wp.category_id = '${category_id}'
+          wp.title LIKE CONCAT('%', ?, '%')
+          OR wp.content LIKE CONCAT('%', ?, '%')
+          AND wp.category_id = CONCAT('%', ?, '%')
         ORDER BY 
           wp.created_at DESC 
-        `
-      );
+        `,
+      [query, query, category_id]
+    );
 
-      const searchResult = await myDataSource.query(
-        `
+    const searchResult = await myDataSource.query(
+      `
         ${findQuerySearchResult}
         WHERE 
-          wp.title LIKE '%${query}%' OR wp.content LIKE '%${query}%' AND wp.category_id = '${category_id}'
+          wp.title LIKE CONCAT('%', ?, '%') OR wp.content LIKE CONCAT('%', ?, '%') AND wp.category_id = CONCAT('%', ?, '%')
         ORDER BY 
           wp.created_at DESC 
-      `
-      );
-
-      let result = { resultCount, searchResult };
-      return result;
-    }
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
+      `,
+      [query, query, category_id]
+    );
+    return { resultCount, searchResult };
   }
 };
 

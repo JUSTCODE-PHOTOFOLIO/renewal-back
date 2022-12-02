@@ -1,10 +1,32 @@
 const myDataSource = require('.');
 
 // 카테고리별 피드 리스트 - 1.fashion 2.pattern 3.travel 4.animal
-const categoryList = async categoryName => {
-  try {
-    let result = await myDataSource.query(
+
+const findCategoryName = async categoryName => {
+  return await myDataSource
+    .query(
       `
+    SELECT
+        EXISTS(
+                SELECT *
+                FROM
+                    Works_Category
+                WHERE
+                    eng_category_name = ( ? )
+            ) as check_categoryName
+    `,
+      [categoryName]
+    )
+    .then(value => {
+      const [item] = value;
+      return {
+        check_categoryName: item.check_categoryName == 1,
+      };
+    });
+};
+const categoryList = async categoryName => {
+  let result = await myDataSource.query(
+    `
       WITH tables1 AS (
         SELECT
           wp.id AS id,
@@ -78,23 +100,19 @@ const categoryList = async categoryName => {
         LEFT JOIN tables3 c ON
           c.posting_id = wp.id
         WHERE
-          wc.eng_category_name = '${categoryName}'
+          wc.eng_category_name = ( ? )
         ORDER BY
           wp.created_at DESC
-      `
-    );
-    return result;
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+      `,
+    [categoryName]
+  );
+  return result;
 };
 
 // tag별 피드 개수
 const tagCount = async () => {
-  try {
-    const result = await myDataSource.query(
-      `
+  const result = await myDataSource.query(
+    `
       SELECT
         wtn.id,
         wtn.name,
@@ -106,15 +124,12 @@ const tagCount = async () => {
       GROUP BY
         wtn.id
       `
-    );
-    return result;
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+  );
+  return result;
 };
 
 module.exports = {
   tagCount,
   categoryList,
+  findCategoryName,
 };

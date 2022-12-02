@@ -2,51 +2,52 @@ const myDataSource = require('.');
 
 // 공감
 const sympathy = async (posting_id, user_id, sympathy_id) => {
-  try {
-    const checkSympathy = await myDataSource.query(
-      `
+  const checkSympathy = await myDataSource.query(
+    `
       SELECT
         COUNT(*) check_cnt
       FROM
         Works_Sympathy_Count wsc
       WHERE
-        posting_id = '${posting_id}'
-        AND user_id = '${user_id}'
-    `
-    );
-    let checkValue = checkSympathy[0].check_cnt;
-    console.log('checkValue =', checkValue);
-    if (checkValue == 0) {
-      const insertSympathy = await myDataSource.query(
-        `
+        posting_id = ?
+        AND user_id = ?
+    `,
+    [posting_id, user_id]
+  );
+  let checkValue = checkSympathy[0].check_cnt;
+
+  // TODO 서비스단으로 올리기
+  if (checkValue == 0) {
+    await myDataSource.query(
+      `
         INSERT
           INTO
           Works_Sympathy_Count (user_id,
           posting_id,
           sympathy_id)
-        VALUES ('${user_id}',
-        '${posting_id}',
-        '${sympathy_id}')
+        VALUES ( ?, ?, ?)
+      `,
+      [user_id, posting_id, sympathy_id]
+    );
+    const result = await myDataSource.query(
       `
-      );
-      const result = await myDataSource.query(
-        `
         SELECT
           *
         FROM
           Works_Sympathy_Count wsc
         WHERE
-          user_id = '${user_id}'
-          AND posting_id = '${posting_id}'
-      `
-      );
+          user_id = ?
+          AND posting_id = ?
+      `,
+      [user_id, posting_id, sympathy_id, user_id, posting_id]
+    );
 
-      const resultCount = await myDataSource.query(
-        `
+    const resultCount = await myDataSource.query(
+      `
         WITH tables AS (
           SELECT
-            wp.id id,
-            ws.sympathy_sort sympathy_sort,
+            wp.id AS id,
+            ws.sympathy_sort AS sympathy_sort,
             IFNULL(COUNT(wsc.id), '0') AS sympathy_cnt
           FROM
             Works_Sympathy ws
@@ -57,7 +58,7 @@ const sympathy = async (posting_id, user_id, sympathy_id) => {
           LEFT JOIN Works_Posting wp ON
             wsc.posting_id = wp.id
           WHERE
-            wp.id = '${posting_id}'
+            wp.id = ?
           GROUP BY
             ws.sympathy_sort
           )
@@ -65,82 +66,79 @@ const sympathy = async (posting_id, user_id, sympathy_id) => {
         SELECT
           a.id,
           ws.sympathy_sort,
-          IFNULL(a.sympathy_cnt, '0') sympathy_cnt
+          IFNULL(a.sympathy_cnt, '0') AS sympathy_cnt
         FROM
           Works_Sympathy ws
         LEFT JOIN tables a ON
-          a.sympathy_sort = ws.sympathy_sort `
-      );
-      let totalResult = { result, resultCount };
-      return totalResult;
-    } else if (checkValue == 1) {
-      const insertSympathy = await myDataSource.query(
-        `
+          a.sympathy_sort = ws.sympathy_sort `,
+      [posting_id]
+    );
+    return { result, resultCount };
+  } else if (checkValue == 1) {
+    await myDataSource.query(
+      `
       UPDATE
         Works_Sympathy_Count
       SET
-        sympathy_id = '${sympathy_id}'
+        sympathy_id = ?
       WHERE
-        user_id = '${user_id}'
-        AND posting_id = '${posting_id}'
+        user_id = ?
+        AND posting_id = ?
+      `,
+      [sympathy_id, user_id, posting_id]
+    );
+    const result = await myDataSource.query(
       `
-      );
-      const result = await myDataSource.query(
-        `
         SELECT
           *
         FROM
           Works_Sympathy_Count wsc
         WHERE
-          user_id = '${user_id}'
-          AND posting_id = '${posting_id}'
-      `
-      );
+          user_id = ?
+          AND posting_id = ?
+      `,
+      [user_id, posting_id]
+    );
 
-      const resultCount = await myDataSource.query(
-        `
-        WITH tables AS (
-          SELECT
-            wp.id id,
-            ws.sympathy_sort sympathy_sort,
-            IFNULL(COUNT(wsc.id), '0') AS sympathy_cnt
-          FROM
-            Works_Sympathy ws
-          LEFT JOIN Works_Sympathy_Count wsc ON
-            ws.id = wsc.sympathy_id
-          LEFT JOIN Users u ON
-            u.id = wsc.user_id
-          LEFT JOIN Works_Posting wp ON
-            wsc.posting_id = wp.id
-          WHERE
-            wp.id = '${posting_id}'
-          GROUP BY
-            ws.sympathy_sort
-        )
-                  
-        SELECT
+    const resultCount = await myDataSource.query(
+      `
+      WITH
+          tables AS (SELECT
+             wp.id AS id,
+             ws.sympathy_sort AS sympathy_sort,
+             IFNULL(COUNT(wsc.id), '0') AS sympathy_cnt
+         FROM
+             Works_Sympathy ws
+                 LEFT JOIN Works_Sympathy_Count wsc ON
+                 ws.id = wsc.sympathy_id
+                 LEFT JOIN Users u ON
+                 u.id = wsc.user_id
+                 LEFT JOIN Works_Posting wp ON
+                 wsc.posting_id = wp.id
+         WHERE
+             wp.id = ?
+         GROUP BY
+             ws.sympathy_sort)
+
+      SELECT
           a.id,
           ws.sympathy_sort,
-          IFNULL(a.sympathy_cnt, '0') sympathy_cnt
-        FROM
+          IFNULL(a.sympathy_cnt, '0') AS sympathy_cnt
+      FROM
           Works_Sympathy ws
-        LEFT JOIN tables a ON
-          a.sympathy_sort = ws.sympathy_sort `
-      );
-      let totalResult = { result, resultCount };
-      return totalResult;
-    }
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
+              LEFT JOIN tables a ON
+              a.sympathy_sort = ws.sympathy_sort
+      `,
+      [posting_id]
+    );
+    return { result, resultCount };
   }
 };
 
 // 공감 취소
 const sympathyCancel = async (posting_id, user_id) => {
-  try {
-    const deleteSympathy = await myDataSource.query(
-      `
+  await myDataSource.query(
+    `
       DELETE
       FROM
         Works_Sympathy_Count
@@ -148,9 +146,9 @@ const sympathyCancel = async (posting_id, user_id) => {
         user_id = '${user_id}'
         AND posting_id = '${posting_id}'
     `
-    );
-    const checkSympathy = await myDataSource.query(
-      `
+  );
+  const checkSympathy = await myDataSource.query(
+    `
       SELECT
         COUNT(*) check_cnt
       FROM
@@ -159,13 +157,8 @@ const sympathyCancel = async (posting_id, user_id) => {
         posting_id = '${posting_id}'
         AND user_id = '${user_id}'
     `
-    );
-    let result = { checkSympathy };
-    return result;
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+  );
+  return { checkSympathy };
 };
 
 module.exports = {
