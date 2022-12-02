@@ -9,7 +9,7 @@ const tagCount = async () => {
 const categoryList = async categoryName => {
   const findCategoryName = await categoryDao.findCategoryName(categoryName);
   if (!findCategoryName.check_categoryName) {
-    throw { statusCode: 400, message: `DO NOT EXISTS CATEGORY NAME` };
+    throw { status: 400, message: `DO NOT EXISTS CATEGORY NAME` };
   } else {
     return await categoryDao.categoryList(categoryName);
   }

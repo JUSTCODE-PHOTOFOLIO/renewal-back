@@ -111,7 +111,7 @@ const categoryList = async categoryName => {
 
 // tag별 피드 개수
 const tagCount = async () => {
-  const result = await myDataSource.query(
+  return await myDataSource.query(
     `
       SELECT
         wtn.id,
@@ -125,7 +125,6 @@ const tagCount = async () => {
         wtn.id
       `
   );
-  return result;
 };
 
 module.exports = {

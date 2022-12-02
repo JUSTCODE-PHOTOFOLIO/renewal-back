@@ -18,7 +18,6 @@ const upload = multer({
   }),
 });
 
-
 const util = {
   success: (status, message, data) => {
     return {
@@ -91,11 +90,11 @@ function errorHandler(err, _1, res, _2) {
   let responseInfo = err;
   if (err.sqlMessage) {
     console.log(err.sqlMessage);
-    responseInfo = { message: 'failed', statusCode: 500, ...err };
+    responseInfo = { message: 'failed', status: 500, ...err };
   }
   console.log(`${red('ERR\t|')}`, err);
   res
-    .status(responseInfo.statusCode || 500)
+    .status(responseInfo.status || 500)
     .json({ message: responseInfo.message || '' });
 }
 

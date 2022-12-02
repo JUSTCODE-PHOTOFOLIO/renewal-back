@@ -56,15 +56,14 @@ const findQueryWorksFeedList = `
         ) 
     `;
 
-const worksList = async sort => {
-  try {
-    if (!sort) {
-      const categorySortCountList = await myDataSource.query(
-        `${findQueryCatagorySortCountList}`
-      );
-      const worksFeedList = await myDataSource.query(
-        `${findQueryWorksFeedList}
+const worksList = async (isSelect, sortOfOrder) => {
+  const categorySortCountList = await myDataSource.query(
+    `${findQueryCatagorySortCountList}`
+  );
+  const worksFeedList = await myDataSource.query(
+    `${findQueryWorksFeedList}
         SELECT 
+        ${isSelect}
         wp.id, 
         u.kor_name AS nickname, 
         u.profile_image,  
@@ -82,61 +81,18 @@ const worksList = async sort => {
       LEFT JOIN tables1 a 
         ON a.id = wp.id 
       LEFT JOIN tables2 b 
-        ON b.id = wp.id 
-      ORDER BY wp.created_at DESC 
-        `
-      );
-      let result = { categorySortCountList, worksFeedList };
-      return result;
-    } else {
-      const categorySortCountList = await myDataSource.query(
-        `${findQueryCatagorySortCountList}`
-      );
-      // sort 종류 ('recommendpoint', 'sympathycnt')
-      const worksFeedList = await myDataSource.query(
-        `
-        ${findQueryWorksFeedList}
-
-        SELECT 
-          CONCAT(
-            b.sympathy_cnt + a.comment_cnt
-            ) recommendpoint, 
-          wp.id, u.kor_name as nickname, 
-          u.profile_image, 
-          c.img_url, wp.title, 
-          IFNULL(a.comment_cnt, '0') comment_cnt, 
-          IFNULL(b.sympathy_cnt, '0') sympathycnt, 
-          wp.view_count, 
-          SUBSTRING(wp.created_at,1,10) as created_at
-        FROM Works_Posting wp 
-        LEFT JOIN Users u 
-          ON wp.user_id = u.id 
-        LEFT JOIN tables3 c 
-          ON c.posting_id = wp.id
-        LEFT JOIN tables1 a 
-          ON a.id = wp.id 
-        LEFT JOIN tables2 b 
-          ON b.id = wp.id 
-        ORDER BY ? DESC 
-        `,
-        [sort]
-      );
-      let result = { categorySortCountList, worksFeedList };
-      return result;
-    }
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+        ON b.id = wp.id
+      ${sortOfOrder}
+      `
+  );
+  return { categorySortCountList, worksFeedList };
 };
 
 // feed 글쓴이와 유저와의 팔로우 관계
 const followCheck = async (id, user_id) => {
-  try {
-    console.log('user_id =', user_id);
-    return await myDataSource
-      .query(
-        `
+  return await myDataSource
+    .query(
+      `
       SELECT
         EXISTS (
           SELECT
@@ -150,26 +106,21 @@ const followCheck = async (id, user_id) => {
             AND follower_id = ?
         ) AS success
     `,
-        [id, user_id]
-      )
-      .then(value => {
-        const [item] = value;
-        return {
-          follow_check: item.success == 1,
-        };
-      });
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+      [id, user_id]
+    )
+    .then(value => {
+      const [item] = value;
+      return {
+        follow_check: item.success == 1,
+      };
+    });
 };
 
 // feed 상세
 const feed = async id => {
-  try {
-    // feed img_url 배열(다수의 이미지가 있을 시)
-    let feedImgArr = await myDataSource.query(
-      `
+  // feed img_url 배열(다수의 이미지가 있을 시)
+  let feedImgArr = await myDataSource.query(
+    `
       SELECT
         COUNT(uf.upload_url) file_cnt,
         JSON_ARRAYAGG(
@@ -188,18 +139,18 @@ const feed = async id => {
         uf.posting_id = ?
         AND uf.file_sort_id = 1
       `,
-      [id]
-    );
-    feedImgArr = [...feedImgArr].map(item => {
-      return {
-        ...item,
-        fileInfo: JSON.parse(item.fileInfo),
-      };
-    });
+    [id]
+  );
+  feedImgArr = [...feedImgArr].map(item => {
+    return {
+      ...item,
+      fileInfo: JSON.parse(item.fileInfo),
+    };
+  });
 
-    // feed 정보와 사용자 정보 + 태그 카운트
-    let feedWithTags = await myDataSource.query(
-      `
+  // feed 정보와 사용자 정보 + 태그 카운트
+  let feedWithTags = await myDataSource.query(
+    `
       SELECT
         wp.id, 
         wp.user_id,
@@ -233,18 +184,18 @@ const feed = async id => {
       WHERE
         wp.id = ?
       `,
-      [id]
-    );
+    [id]
+  );
 
-    feedWithTags = [...feedWithTags].map(item => {
-      return {
-        ...item,
-        tagInfo: JSON.parse(item.tagInfo),
-      };
-    });
+  feedWithTags = [...feedWithTags].map(item => {
+    return {
+      ...item,
+      tagInfo: JSON.parse(item.tagInfo),
+    };
+  });
 
-    let feedCommentInfo = await myDataSource.query(
-      `
+  let feedCommentInfo = await myDataSource.query(
+    `
       SELECT
         c.id,
         c.user_id,
@@ -263,12 +214,12 @@ const feed = async id => {
       ORDER BY
         created_at ASC      
       `,
-      [id]
-    );
+    [id]
+  );
 
-    // feed 글쓴이의 다른 작품들
-    let moreFeedinfo = await myDataSource.query(
-      `
+  // feed 글쓴이의 다른 작품들
+  let moreFeedinfo = await myDataSource.query(
+    `
       WITH tables1 AS (
         SELECT
           id,
@@ -325,18 +276,18 @@ const feed = async id => {
         wp.user_id = b.user_id
         AND NOT wp.id = ?
       `,
-      [id, id]
-    );
-    moreFeedinfo = [...moreFeedinfo].map(item => {
-      return {
-        ...item,
-        more_feed: JSON.parse(item.more_feed),
-      };
-    });
+    [id, id]
+  );
+  moreFeedinfo = [...moreFeedinfo].map(item => {
+    return {
+      ...item,
+      more_feed: JSON.parse(item.more_feed),
+    };
+  });
 
-    // feed 글쓴이에 대한 팔로워 정보
-    let writerInfo = await myDataSource.query(
-      `
+  // feed 글쓴이에 대한 팔로워 정보
+  let writerInfo = await myDataSource.query(
+    `
       SELECT
         wp.id,
         u.id AS id,
@@ -400,20 +351,20 @@ const feed = async id => {
       WHERE
         wp.id = ?
       `,
-      [id, id, id]
-    );
+    [id, id, id]
+  );
 
-    writerInfo = [...writerInfo].map(item => {
-      return {
-        ...item,
-        follower_list: JSON.parse(item.follower_list),
-        following_list: JSON.parse(item.following_list),
-      };
-    });
+  writerInfo = [...writerInfo].map(item => {
+    return {
+      ...item,
+      follower_list: JSON.parse(item.follower_list),
+      following_list: JSON.parse(item.following_list),
+    };
+  });
 
-    // feed + 총 공감수
-    let sympathyCount = await myDataSource.query(
-      `
+  // feed + 총 공감수
+  let sympathyCount = await myDataSource.query(
+    `
       SELECT
         COUNT(*) AS total_sympathy_cnt
       FROM
@@ -427,12 +378,12 @@ const feed = async id => {
       WHERE
         wp.id = ?
       `,
-      [id]
-    );
+    [id]
+  );
 
-    // feed + 공감별 개수
-    let sympathySortCount = await myDataSource.query(
-      `
+  // feed + 공감별 개수
+  let sympathySortCount = await myDataSource.query(
+    `
       WITH tables AS (
         SELECT
           wp.id id,
@@ -461,11 +412,11 @@ const feed = async id => {
       LEFT JOIN tables a ON
         a.sympathy_sort = ws.sympathy_sort
       `,
-      [id]
-    );
+    [id]
+  );
 
-    let anotherFeedList = await myDataSource.query(
-      `
+  let anotherFeedList = await myDataSource.query(
+    `
       WITH tables1 AS (
         SELECT
           wp.id AS id,
@@ -538,12 +489,12 @@ const feed = async id => {
       ORDER BY
         wp.created_at DESC
       `,
-      [id]
-    );
+    [id]
+  );
 
-    // 조회수 카운팅 (IP주소나 시간만료 같은 장치는 아직 없음.)
-    const viewCount = await myDataSource.query(
-      `
+  // 조회수 카운팅 (IP주소나 시간만료 같은 장치는 아직 없음.)
+  await myDataSource.query(
+    `
       UPDATE
         Works_Posting
       SET
@@ -551,24 +502,20 @@ const feed = async id => {
       WHERE
         id = ?
       `,
-      [id]
-    );
+    [id]
+  );
 
-    let result = {
-      feedImgArr,
-      feedWithTags,
-      feedCommentInfo,
-      moreFeedinfo,
-      writerInfo,
-      sympathyCount,
-      sympathySortCount,
-      anotherFeedList,
-    };
-    return result;
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+  let result = {
+    feedImgArr,
+    feedWithTags,
+    feedCommentInfo,
+    moreFeedinfo,
+    writerInfo,
+    sympathyCount,
+    sympathySortCount,
+    anotherFeedList,
+  };
+  return result;
 };
 
 module.exports = {
