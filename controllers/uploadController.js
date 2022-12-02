@@ -10,7 +10,10 @@ const uploadImages = async (req, res) => {
     const path = image.map(img => img.location);
     const { title, content, tag, category_name, public_status } = req.body;
     const arrayTag = tag.split(',');
-    const verifiedToken = jwt.verify(req.headers.token, process.env.SECRET_KEY);
+    const verifiedToken = jwt.verify(
+      req.headers.authorization,
+      process.env.SECRET_KEY
+    );
     const user_id = verifiedToken.id;
     req.user_id = user_id;
 
