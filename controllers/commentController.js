@@ -23,7 +23,7 @@ const postComment = async (req, res) => {
       id,
       user_id
     );
-    res.status(200).json({
+    res.status(201).json({
       data: postedComment,
     });
     console.log('COMMENT POSTED');

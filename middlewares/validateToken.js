@@ -5,7 +5,7 @@ const validateToken = (req, res, next) => {
   try {
     // 요청 헤더에 저장된 토큰(req.headers.authorization)과 비밀키를 사용하여 토큰을 req.decoded에 반환
     let token = req.headers.authorization;
-    token.includes('Bearer') ? token.replace(/^Bearer\s+/, '') : token;
+    token = token.includes('Bearer') ? token.replace(/^Bearer\s+/, '') : token;
     const verifiedToken = jwt.verify(token, process.env.SECRET_KEY);
     req.user_id = verifiedToken.id;
     next();
