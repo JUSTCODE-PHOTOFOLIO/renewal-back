@@ -58,13 +58,13 @@ const findDbUser = async login_id => {
 };
 
 const getAccountInfo = async user_id => {
-  const [userdata] = await myDataSource.query(
+  const [userInfoById] = await myDataSource.query(
     `
-  SELECT * FROM Users WHERE login_id = (?);
+  SELECT * FROM Users WHERE id = (?);
   `,
     [user_id]
   );
-  return userdata;
+  return userInfoById;
 };
 
 const modifyAccountInfo = async (

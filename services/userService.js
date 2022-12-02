@@ -127,8 +127,8 @@ const loginUser = async (login_id, password) => {
 };
 
 const getAccountInfo = async user_id => {
-  const userdata = await userDao.getAccountInfo(user_id);
-  return userdata;
+  const userInfoById = await userDao.getAccountInfo(user_id);
+  return userInfoById;
 };
 
 const modifyAccountInfo = async (
