@@ -5,8 +5,8 @@ const { asyncWrap } = require('../utils/util');
 const workController = require('../controllers/workController');
 
 // 카테고리별 총 게시물 수 + 최신 feed list
-router.get('', asyncWrap(workController.worksList));
-router.get('/feed/:id', asyncWrap(workController.feed));
-router.get('/:sort', asyncWrap(workController.worksList)); // sort 종류 ('recommendpoint', 'sympathycnt')
+router.get('', asyncWrap(workController.getWorkList));
+router.get('/feed/:id', asyncWrap(workController.getFeed));
+router.get('/:sort', asyncWrap(workController.getWorkList)); // sort 종류 ('recommendpoint', 'sympathycnt')
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const workDao = require('../models/workDao');
 
 // 카테고리별 총 게시물 수 + 최신 feed list
-const worksList = async sort => {
+const getWorkList = async sort => {
   // sort 종류 ('recommendpoint', 'sympathycnt')
   const defaultOrder = 'ORDER BY wp.created_at DESC';
   const recommendPoint = `CONCAT(b.sympathy_cnt + a.comment_cnt) recommendpoint,`;
@@ -17,18 +17,19 @@ const worksList = async sort => {
     }
     return orderByItem;
   };
+
   changeSort(sort);
 
   const sortOfOrder = sort ? `ORDER BY ${orderByItem} DESC` : defaultOrder;
-  return await workDao.worksList(isSelect, sortOfOrder);
+  return await workDao.getWorkList(isSelect, sortOfOrder);
 };
 
 // 지정된 피드 상세
-const feed = async id => {
-  return await workDao.feed(id);
+const getFeed = async id => {
+  return await workDao.getFeed(id);
 };
 
 module.exports = {
-  worksList,
-  feed,
+  getWorkList,
+  getFeed,
 };

@@ -1,7 +1,7 @@
 const myDataSource = require('.');
 
 // 공감
-const sympathy = async (posting_id, user_id, sympathy_id) => {
+const createSympathy = async (posting_id, user_id, sympathy_id) => {
   const checkSympathy = await myDataSource.query(
     `
       SELECT
@@ -136,7 +136,7 @@ const sympathy = async (posting_id, user_id, sympathy_id) => {
 };
 
 // 공감 취소
-const sympathyCancel = async (posting_id, user_id) => {
+const deleteSympathy = async (posting_id, user_id) => {
   await myDataSource.query(
     `
       DELETE
@@ -164,6 +164,6 @@ const sympathyCancel = async (posting_id, user_id) => {
 };
 
 module.exports = {
-  sympathy,
-  sympathyCancel,
+  createSympathy,
+  deleteSympathy,
 };

@@ -8,12 +8,12 @@ const sympathyController = require('../controllers/sympathyController');
 router.post(
   '',
   asyncWrap(validateToken),
-  asyncWrap(sympathyController.sympathy)
+  asyncWrap(sympathyController.createSympathy)
 );
 router.delete(
   '',
   asyncWrap(validateToken),
-  asyncWrap(sympathyController.sympathyCancel)
+  asyncWrap(sympathyController.deleteSympathy)
 );
 
 module.exports = router;

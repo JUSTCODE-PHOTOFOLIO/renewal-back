@@ -9,7 +9,7 @@ const feedController = require('../controllers/feedController');
 router.get(
   '/list',
   asyncWrap(validateToken),
-  asyncWrap(feedController.feedsList)
+  asyncWrap(feedController.getFeedsList)
 );
 
 module.exports = router;

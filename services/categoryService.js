@@ -1,21 +1,21 @@
 const categoryDao = require('../models/categoryDao');
 
 // tag별 피드 개수
-const tagCount = async () => {
-  return await categoryDao.tagCount();
+const findTagCount = async () => {
+  return await categoryDao.findTagCount();
 };
 
 // 카테고리별 피드 리스트
-const categoryList = async categoryName => {
+const findCategoryList = async categoryName => {
   const findCategoryName = await categoryDao.findCategoryName(categoryName);
   if (!findCategoryName.check_categoryName) {
     throw { status: 400, message: `DO NOT EXISTS CATEGORY NAME` };
   } else {
-    return await categoryDao.categoryList(categoryName);
+    return await categoryDao.findCategoryList(categoryName);
   }
 };
 
 module.exports = {
-  tagCount,
-  categoryList,
+  findTagCount,
+  findCategoryList,
 };
