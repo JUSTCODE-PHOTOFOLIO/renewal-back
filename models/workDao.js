@@ -165,7 +165,7 @@ const feed = async id => {
 
     let feedCommentInfo = await myDataSource.query(
       `
-      SELECT c.id, c.user_id, u.kor_name as nickname, c.comment, 
+      SELECT c.id, c.user_id, u.kor_name as kor_name, c.comment, 
         SUBSTRING(c.created_at,1,10) as created_at , 
         SUBSTRING(c.updated_at,1,10) as updated_at  
       from Comment c 
