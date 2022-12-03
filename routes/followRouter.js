@@ -5,8 +5,9 @@ const { asyncWrap } = require('../utils/util');
 const { validateToken } = require('../middlewares/validateToken');
 const followController = require('../controllers/followController');
 
-router.get(
-  '/:id',
+// getFollow (팔로우 여부 확인)
+router.post(
+  '/check',
   asyncWrap(validateToken),
   asyncWrap(followController.followCheck)
 );

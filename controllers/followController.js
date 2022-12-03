@@ -10,7 +10,7 @@ const keyError = REQUIRE_KEYS => {
 
 // 상세피드에서 로그인유저의 팔로잉 체크여부
 const followCheck = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
   const user_id = req.user_id;
   const result = await followService.followCheck(id, user_id);
   res.status(200).json(result);
