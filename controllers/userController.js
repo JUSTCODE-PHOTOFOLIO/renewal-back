@@ -105,10 +105,8 @@ const getAccountInfo = async (req, res) => {
       error.statusCode = 404;
       throw error;
     }
-    const userdata = await userService.getAccountInfo(user_id);
-    res.status(200).json({ data: userdata });
-    console.log(`user_id ${user_id}'s information is being displayed`);
-    return userdata;
+    const userInfoById = await userService.getAccountInfo(user_id);
+    res.status(200).json({ data: userInfoById });
   } catch (error) {
     console.log(error.message);
     res.status(error.statusCode).json({ message: error.message });
