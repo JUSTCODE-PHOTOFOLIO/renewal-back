@@ -5,6 +5,12 @@ const { asyncWrap } = require('../utils/util');
 const { validateToken } = require('../middlewares/validateToken');
 const followController = require('../controllers/followController');
 
+router.get(
+  '/:id',
+  asyncWrap(validateToken),
+  asyncWrap(followController.followCheck)
+);
+
 router.post(
   '',
   asyncWrap(validateToken),

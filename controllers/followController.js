@@ -8,6 +8,14 @@ const keyError = REQUIRE_KEYS => {
   });
 };
 
+// 상세피드에서 로그인유저의 팔로잉 체크여부
+const followCheck = async (req, res) => {
+  const { id } = req.params;
+  const user_id = req.user_id;
+  const result = await followService.followCheck(id, user_id);
+  res.status(200).json(result);
+};
+
 // 팔로우 체결
 const following = async (req, res) => {
   const { following_id } = req.body;
@@ -33,6 +41,7 @@ const followingCancel = async (req, res) => {
 };
 
 module.exports = {
+  followCheck,
   following,
   followingCancel,
 };
