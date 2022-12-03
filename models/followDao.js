@@ -6,17 +6,15 @@ const followCheck = async (id, user_id) => {
     .query(
       `
       SELECT
-        EXISTS (
-          SELECT
-            f.id
-          FROM
-            Follow f
-          LEFT JOIN Works_Posting wp ON
-            wp.user_id = f.following_id
-          WHERE
-            wp.id = ?
-            AND follower_id = ?
-        ) AS success
+          EXISTS(
+                  SELECT
+                      id
+                  FROM
+                      Follow f
+                  WHERE
+                      following_id = ?
+                    AND follower_id = ?
+              ) AS success
     `,
       [id, user_id]
     )
