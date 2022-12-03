@@ -9,20 +9,21 @@ const following = async (following_id, user_id) => {
         Follow (following_id,
         follower_id)
       VALUES 
-        ('${following_id}',
-        '${user_id}')
-    `
+        (?,?)
+    `,
+    [following_id, user_id]
   );
   const followingResult = await myDataSource.query(
     `
       SELECT
         *
       FROM
-        Follow f
+        Follow
       WHERE
-        following_id = '${following_id}'
-        AND follower_id = '${user_id}'
-    `
+        following_id = ?
+        AND follower_id = ?
+    `,
+    [following_id, user_id]
   );
   return { followingResult };
 };
@@ -35,9 +36,10 @@ const followingCancel = async (following_id, user_id) => {
       FROM
         Follow
       WHERE
-        following_id = '${following_id}'
-        AND follower_id = '${user_id}'
-    `
+        following_id = ?
+        AND follower_id = ?
+    `,
+    [following_id, user_id]
   );
   const deleteResult = await myDataSource.query(
     `
@@ -46,9 +48,10 @@ const followingCancel = async (following_id, user_id) => {
       FROM
         Follow f
       WHERE
-        following_id = '${following_id}'
-        AND follower_id = '${user_id}'
-    `
+        following_id = ?
+        AND follower_id = ?
+    `,
+    [following_id, user_id]
   );
   return { deleteResult };
 };
