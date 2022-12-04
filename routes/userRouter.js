@@ -35,7 +35,4 @@ router.delete(
   asyncWrap(userController.deleteAccount)
 );
 
-//테스트
-router.get('/test', userController.test);
-
 module.exports = router;

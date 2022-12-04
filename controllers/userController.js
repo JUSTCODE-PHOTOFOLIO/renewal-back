@@ -141,37 +141,10 @@ const deleteAccount = async (req, res) => {
   console.log(`USER ${user_id}'s HAS BEEN REMOVED`);
 };
 
-const test = async (req, res) => {
-  const user = await userService.test();
-  // console.log(user);
-  // console.log(user.created_at);
-  // console.log(typeof user.created_at);
-  // console.log(typeof user);
-  // console.log(typeof user.id);
-  // console.log(typeof user.login_id);
-  // console.log(Object.keys(user.created_at));
-  // console.log(Object.values(user.created_at));
-  // console.log(Object.keys(user));
-  // console.log(Object.values(user));
-  let date = new Date();
-  const userWillbeDeletedAtThisMoment = user.created_at; //실제로는 user.delete_at이 될 듯
-  const date2 = new Date(userWillbeDeletedAtThisMoment);
-  const deleteAfterThisSeconds = date2 - date;
-  setTimeout(() => {
-    console.log('정해진 시간 후에 나올 메세지');
-  }, deleteAfterThisSeconds);
-
-  console.log(deleteAfterThisSeconds);
-
-  res.status(200).json({
-    message: `USER INFORMATION IS BEING DISPLAYED`,
-  });
-};
 module.exports = {
   createUser,
   loginUser,
   getAccountInfo,
   modifyAccountInfo,
   deleteAccount,
-  test,
 };
