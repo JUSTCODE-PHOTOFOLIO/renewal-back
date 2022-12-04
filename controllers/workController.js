@@ -17,9 +17,7 @@ const getFeed = async (req, res) => {
 
 const deletefeed = async (req, res) => {
   user_id = req.user_id;
-  const { id } = req.params;
-  // const { posting_id } = req.body;
-  const posting_id = id;
+  const posting_id = req.params.id;
   const REQUIRE_KEYS = [user_id, posting_id];
 
   Object.keys(REQUIRE_KEYS).map(key => {
@@ -36,7 +34,7 @@ const deletefeed = async (req, res) => {
 
   await workService.deletefeed(posting_id);
 
-  res.status(204).json({ data: null });
+  res.status(204).json({ message: 'FEED DELETED' });
 };
 
 module.exports = {
