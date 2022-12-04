@@ -1,6 +1,6 @@
 const myDataSource = require('.');
-// 카테고리별 총 게시물 수 + 최신 feed list
 
+// 카테고리별 총 게시물 수 + 최신 feed list
 const findQueryCatagorySortCountList = `
     SELECT 
       wc.id, 
@@ -54,7 +54,7 @@ const findQueryWorksFeedList = `
         ) 
     `;
 
-const worksList = async (isSelect, sortOfOrder) => {
+const getWorkList = async (isSelect, sortOfOrder) => {
   const categorySortCountList = await myDataSource.query(
     `${findQueryCatagorySortCountList}`
   );
@@ -87,7 +87,7 @@ const worksList = async (isSelect, sortOfOrder) => {
 };
 
 // feed 상세
-const feed = async id => {
+const getFeed = async id => {
   // feed img_url 배열(다수의 이미지가 있을 시)
   let feedImgArr = await myDataSource.query(
     `
@@ -552,7 +552,7 @@ const deletefeed = async posting_id => {
 };
 
 module.exports = {
-  worksList,
-  feed,
+  getWorkList,
+  getFeed,
   deletefeed,
 };

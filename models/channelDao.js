@@ -1,10 +1,10 @@
 const myDataSource = require('.');
 
-const channel = async (following_id, user_id) => {
-  let userInfo = await myDataSource.query(
+const getChannel = async (following_id, user_id) => {
+  let writerInfo = await myDataSource.query(
     `
     SELECT 
-      id AS user_id, 
+      id, 
       nickname, 
       kor_name, 
       eng_name, 
@@ -116,7 +116,7 @@ const channel = async (following_id, user_id) => {
     [following_id]
   );
   return {
-    userInfo,
+    writerInfo,
     userFollowingInfo,
     userFollowerInfo,
     usersPosts,
@@ -124,5 +124,5 @@ const channel = async (following_id, user_id) => {
 };
 
 module.exports = {
-  channel,
+  getChannel,
 };

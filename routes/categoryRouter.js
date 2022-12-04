@@ -4,7 +4,7 @@ const router = express.Router();
 const { asyncWrap } = require('../utils/util');
 const categoryController = require('../controllers/categoryController');
 
-router.get('/tags', asyncWrap(categoryController.tagCount));
-router.get('/:categoryName', asyncWrap(categoryController.categoryList));
+router.get('/tags', asyncWrap(categoryController.findTagCount));
+router.get('/:categoryName', asyncWrap(categoryController.findCategoryList));
 
 module.exports = router;

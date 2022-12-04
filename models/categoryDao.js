@@ -24,8 +24,8 @@ const findCategoryName = async categoryName => {
       };
     });
 };
-const categoryList = async categoryName => {
-  let result = await myDataSource.query(
+const findCategoryList = async categoryName => {
+  return await myDataSource.query(
     `
       WITH tables1 AS (
         SELECT
@@ -106,11 +106,10 @@ const categoryList = async categoryName => {
       `,
     [categoryName]
   );
-  return result;
 };
 
 // tag별 피드 개수
-const tagCount = async () => {
+const findTagCount = async () => {
   return await myDataSource.query(
     `
       SELECT
@@ -128,7 +127,7 @@ const tagCount = async () => {
 };
 
 module.exports = {
-  tagCount,
-  categoryList,
+  findTagCount,
+  findCategoryList,
   findCategoryName,
 };
