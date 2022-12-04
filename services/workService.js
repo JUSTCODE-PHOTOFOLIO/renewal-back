@@ -29,7 +29,12 @@ const getFeed = async id => {
   return await workDao.getFeed(id);
 };
 
+const deletefeed = async posting_id => {
+  await workDao.deletefeed(posting_id);
+};
+
 module.exports = {
   getWorkList,
   getFeed,
+  deletefeed,
 };
