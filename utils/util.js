@@ -12,8 +12,8 @@ const upload = multer({
     bucket: 'photofolio-renewal',
     acl: 'public-read',
     key: function (req, file, cb) {
-      console.log(file),
-        cb(null, Date.now() + '.' + file.originalname.split('.').pop()); // 이름 설정
+      // console.log(file),
+      cb(null, Date.now() + '.' + file.originalname.split('.').pop()); // 이름 설정
     },
   }),
 });

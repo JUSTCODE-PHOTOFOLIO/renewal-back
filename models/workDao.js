@@ -546,6 +546,9 @@ const deletefeed = async posting_id => {
     `DELETE FROM Works_Sympathy_Count WHERE posting_id = (?)`,
     [posting_id]
   );
+  await myDataSource.query(`DELETE FROM upload_file WHERE posting_id = (?)`, [
+    posting_id,
+  ]);
   await myDataSource.query(`DELETE FROM Works_posting WHERE id = (?)`, [
     posting_id,
   ]);

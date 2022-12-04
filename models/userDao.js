@@ -97,11 +97,7 @@ const modifyAccountInfo = async (
 };
 
 const deleteAccount = async user_id => {
-  await myDataSource.query(
-    `
-    SET foreign_key_checks = 0
-    `
-  );
+  await myDataSource.query(`SET foreign_key_checks=0`);
   let feedsBasket = [];
   const feedsWrittenByUser = await myDataSource.query(
     `SELECT id FROM Works_posting WHERE user_id = (?)`,
@@ -144,11 +140,13 @@ const deleteAccount = async user_id => {
       `DELETE FROM Works_Sympathy_Count WHERE posting_id = (?)`,
       [feedsBasket[i].id]
     );
+    await myDataSource.query(`DELETE FROM upload_file WHERE posting_id = (?)`, [
+      feedsBasket[i].id,
+    ]);
     await myDataSource.query(`DELETE FROM Works_posting WHERE id = (?)`, [
       feedsBasket[i].id,
     ]);
   }
-
   await myDataSource.query(
     `
     DELETE FROM
@@ -157,11 +155,7 @@ const deleteAccount = async user_id => {
     `,
     [user_id]
   );
-  await myDataSource.query(
-    `
-    SET foreign_key_checks = 1
-    `
-  );
+  await myDataSource.query(`SET foreign_key_checks=1`);
 };
 
 module.exports = {
