@@ -11,7 +11,7 @@ const createSympathy = async (posting_id, user_id, sympathy_id) => {
     posting_id,
     user_id
   );
-  if (findSympathyOfFeedByUser === '0') {
+  if (findSympathyOfFeedByUser.checkSympathyByUser === false) {
     return await sympathyDao.createSympathy(posting_id, user_id, sympathy_id);
   } else {
     return await sympathyDao.updateSympathy(posting_id, user_id, sympathy_id);
