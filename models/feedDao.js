@@ -1,7 +1,7 @@
 const myDataSource = require('.');
 
 // 최신 feed list
-const feedsList = async user_id => {
+const getFeedsList = async user_id => {
   const feedsList = await myDataSource.query(
     `
       WITH tables1 AS (
@@ -92,4 +92,4 @@ const feedsList = async user_id => {
   return { feedsList };
 };
 
-module.exports = { feedsList };
+module.exports = { getFeedsList };

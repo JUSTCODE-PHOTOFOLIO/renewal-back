@@ -71,7 +71,7 @@ const findQuerySearchResult = `
   `;
 
 // 검색어 입력시 + 카테고리 설정
-const searchList = async (query, category_id) => {
+const getSearchList = async (query, category_id) => {
   // TODO 서비스단으로 올리기!!
   if (!category_id) {
     const resultCount = await myDataSource.query(
@@ -133,4 +133,4 @@ const searchList = async (query, category_id) => {
   }
 };
 
-module.exports = { searchList };
+module.exports = { getSearchList };

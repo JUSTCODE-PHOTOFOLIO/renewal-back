@@ -1,7 +1,7 @@
 const myDataSource = require('.');
 
 // feed 글쓴이와 유저와의 팔로우 관계
-const followCheck = async (id, user_id) => {
+const getFollowResult = async (id, user_id) => {
   return await myDataSource
     .query(
       `
@@ -49,7 +49,7 @@ const isFollow = async (following_id, user_id) => {
     });
 };
 // follow 체결 관련
-const following = async (following_id, user_id) => {
+const createFollow = async (following_id, user_id) => {
   await myDataSource.query(
     `
       INSERT
@@ -65,7 +65,7 @@ const following = async (following_id, user_id) => {
 };
 
 // follow 취소 관련
-const followingCancel = async (following_id, user_id) => {
+const deleteFollow = async (following_id, user_id) => {
   await myDataSource.query(
     `
       DELETE
@@ -82,7 +82,7 @@ const followingCancel = async (following_id, user_id) => {
 
 module.exports = {
   isFollow,
-  followCheck,
-  following,
-  followingCancel,
+  getFollowResult,
+  createFollow,
+  deleteFollow,
 };
