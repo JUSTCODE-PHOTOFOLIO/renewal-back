@@ -539,16 +539,28 @@ const deletefeed = async posting_id => {
       `DELETE FROM Works_Tag_names WHERE id = ${tagsShouldBeDeletedFromDB[i][0].tag_id}`
     );
   }
-  await myDataSource.query(`DELETE FROM Comments WHERE posting_id = (?)`, [
+  await myDataSource.query(`DELETE FROM Comment WHERE posting_id = (?)`, [
     posting_id,
   ]);
   await myDataSource.query(
     `DELETE FROM Works_Sympathy_Count WHERE posting_id = (?)`,
     [posting_id]
   );
-  await myDataSource.query(`DELETE FROM Works_posting WHERE posting_id = (?)`, [
+  await myDataSource.query(
+    `
+    SET foreign_key_checks = 0
+    `
+  );
+
+  await myDataSource.query(`DELETE FROM Works_posting WHERE id = (?)`, [
     posting_id,
   ]);
+
+  await myDataSource.query(
+    `
+    SET foreign_key_checks = 1
+    `
+  );
 };
 
 module.exports = {
