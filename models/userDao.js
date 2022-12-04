@@ -3,7 +3,7 @@ const myDataSource = require('.');
 const getUserById = async login_id => {
   const userId = await myDataSource.query(
     `
-    SELECT id, email FROM Users WHERE login_id= (?)
+    SELECT id, email FROM Users WHERE login_id= ?
   `,
     [login_id]
   );
@@ -13,7 +13,7 @@ const getUserById = async login_id => {
 const getUserByEmail = async email => {
   const userEmail = await myDataSource.query(
     `
-    SELECT id, email FROM Users WHERE email= (?)
+    SELECT id, email FROM Users WHERE email= ?
   `,
     [email]
   );
