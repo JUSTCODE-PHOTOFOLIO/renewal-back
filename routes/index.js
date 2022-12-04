@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+const { errorHandler } = require('../utils/util');
+
 const userRouter = require('./userRouter');
-const postRouter = require('./workRouter');
 const categoryRouter = require('./categoryRouter');
 const feedRouter = require('./feedRouter');
 const workRouter = require('./workRouter');
@@ -24,5 +25,7 @@ router.use('/sympathy', sympathyRouter);
 router.use('/follow', followRouter);
 router.use('/channel', channelRouter);
 router.use('/comments', commentRouter);
+
+router.use(errorHandler);
 
 module.exports = router;

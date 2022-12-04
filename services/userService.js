@@ -114,21 +114,21 @@ const loginUser = async (login_id, password) => {
   const dbUser = await userDao.findDbUser(login_id);
   if (!dbUser) {
     const error = new Error('회원가입 내역이 없으시네요.');
-    error.statusCode = 404;
+    error.status = 404;
     throw error;
   }
   const pwSame = bcrypt.compareSync(password, dbUser.password);
   if (!pwSame) {
     const error = new Error('비밀번호가 다릅니다.');
-    error.statusCode = 400;
+    error.status = 400;
     throw error;
   }
   return dbUser;
 };
 
 const getAccountInfo = async user_id => {
-  const userdata = await userDao.getAccountInfo(user_id);
-  return userdata;
+  const userInfoById = await userDao.getAccountInfo(user_id);
+  return userInfoById;
 };
 
 const modifyAccountInfo = async (

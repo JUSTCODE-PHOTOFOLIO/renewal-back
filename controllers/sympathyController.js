@@ -1,36 +1,42 @@
 const sympathyService = require('../services/sympathyService');
 
+const catchKeyError = REQUIRE_KEYS => {
+  Object.keys(REQUIRE_KEYS).map(key => {
+    if (!REQUIRE_KEYS[key]) {
+      throw new Error(`KEY_ERROR: ${key}`);
+    }
+  });
+};
+
 // 공감
-const sympathy = async (req, res) => {
-  try {
-    const { posting_id, sympathy_id } = req.body;
-    user_id = req.user_id;
-    const result = await sympathyService.sympathy(
-      posting_id,
-      user_id,
-      sympathy_id
-    );
-    res.status(200).json(result);
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+const createSympathy = async (req, res) => {
+  const { posting_id, sympathy_id } = req.body;
+  let user_id = req.user_id;
+
+  const REQUIRE_KEYS = { posting_id, sympathy_id };
+  catchKeyError(REQUIRE_KEYS);
+
+  const result = await sympathyService.createSympathy(
+    posting_id,
+    user_id,
+    sympathy_id
+  );
+  res.status(200).json(result);
 };
 
 // 공감 취소
-const sympathyCancel = async (req, res) => {
-  try {
-    const { posting_id } = req.body;
-    user_id = req.user_id;
-    const result = await sympathyService.sympathyCancel(posting_id, user_id);
-    res.status(200).json(result);
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+const deleteSympathy = async (req, res) => {
+  const { posting_id } = req.body;
+  let user_id = req.user_id;
+
+  const REQUIRE_KEYS = { posting_id };
+  catchKeyError(REQUIRE_KEYS);
+
+  const result = await sympathyService.deleteSympathy(posting_id, user_id);
+  res.status(200).json(result);
 };
 
 module.exports = {
-  sympathy,
-  sympathyCancel,
+  createSympathy,
+  deleteSympathy,
 };

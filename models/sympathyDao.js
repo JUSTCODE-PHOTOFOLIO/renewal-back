@@ -1,111 +1,173 @@
 const myDataSource = require('.');
 
-// 공감
-const sympathy = async (posting_id, user_id, sympathy_id) => {
-  try {
-    const checkSympathy = await myDataSource.query(
-      `
-    SELECT COUNT(*) check_cnt FROM Works_Sympathy_Count wsc
-    WHERE posting_id = '${posting_id}' and user_id = '${user_id}'
+// 피드에서 로그인유저의 공감여부 확인하기
+const findSympathyOfFeedByUser = async (posting_id, user_id) => {
+  const checkSympathy = await myDataSource.query(
     `
-    );
-    let checkValue = checkSympathy[0].check_cnt;
-    console.log('checkValue =', checkValue);
-    if (checkValue == 0) {
-      const insertSympathy = await myDataSource.query(
-        `
-      INSERT INTO Works_Sympathy_Count (user_id, posting_id, sympathy_id)
-      VALUES ('${user_id}', '${posting_id}', '${sympathy_id}')
-      `
-      );
-      const result = await myDataSource.query(
-        `
-      SELECT * FROM Works_Sympathy_Count wsc 
-      WHERE user_id = '${user_id}' and posting_id = '${posting_id}'
-      `
-      );
+      SELECT
+        COUNT(*) check_cnt
+      FROM
+        Works_Sympathy_Count wsc
+      WHERE
+        posting_id = ?
+        AND user_id = ?
+    `,
+    [posting_id, user_id]
+  );
+  return checkSympathy[0].check_cnt;
+};
 
-      const resultCount = await myDataSource.query(
-        `
-        with tables as (
-          SELECT wp.id id,  ws.sympathy_sort sympathy_sort, 
-            IFNULL(COUNT(wsc.id), '0') as sympathy_cnt
-          FROM  Works_Sympathy ws
-            LEFT JOIN Works_Sympathy_Count wsc on ws.id  = wsc.sympathy_id 
-            LEFT JOIN Users u on u.id = wsc.user_id 
-            LEFT JOIN Works_Posting wp ON wsc.posting_id = wp.id 
-            WHERE wp.id = '${posting_id}'
-            GROUP by ws.sympathy_sort
-            )
-        
-        SELECT a.id, ws.sympathy_sort, IFNULL(a.sympathy_cnt, '0') sympathy_cnt from Works_Sympathy ws 
-        LEFT JOIN tables a on a.sympathy_sort = ws.sympathy_sort `
-      );
-      let totalResult = { result, resultCount };
-      return totalResult;
-    } else if (checkValue == 1) {
-      const insertSympathy = await myDataSource.query(
-        `
-      UPDATE Works_Sympathy_Count SET sympathy_id = '${sympathy_id}'
-      WHERE user_id = '${user_id}' and posting_id = '${posting_id}'
-      `
-      );
-      const result = await myDataSource.query(
-        `
-      SELECT * FROM Works_Sympathy_Count wsc 
-      WHERE user_id = '${user_id}' and posting_id = '${posting_id}'
-      `
-      );
+// 공감하기
+const createSympathy = async (posting_id, user_id, sympathy_id) => {
+  await myDataSource.query(
+    `
+        INSERT
+        INTO
+            Works_Sympathy_Count (user_id,
+                                  posting_id,
+                                  sympathy_id)
+        VALUES
+            (?, ?, ?)
+    `,
+    [user_id, posting_id, sympathy_id]
+  );
+  const result = await myDataSource.query(
+    `
+        SELECT *
+        FROM
+            Works_Sympathy_Count wsc
+        WHERE
+            user_id = ?
+          AND posting_id = ?
+    `,
+    [user_id, posting_id, sympathy_id, user_id, posting_id]
+  );
 
-      const resultCount = await myDataSource.query(
-        `
-        with tables as (
-          SELECT wp.id id,  ws.sympathy_sort sympathy_sort, 
-            IFNULL(COUNT(wsc.id), '0') as sympathy_cnt
-          FROM  Works_Sympathy ws
-            LEFT JOIN Works_Sympathy_Count wsc on ws.id  = wsc.sympathy_id 
-            LEFT JOIN Users u on u.id = wsc.user_id 
-            LEFT JOIN Works_Posting wp ON wsc.posting_id = wp.id 
-            WHERE wp.id = '${posting_id}'
-            GROUP by ws.sympathy_sort
-            )
-        
-        SELECT a.id, ws.sympathy_sort, IFNULL(a.sympathy_cnt, '0') sympathy_cnt from Works_Sympathy ws 
-        LEFT JOIN tables a on a.sympathy_sort = ws.sympathy_sort `
-      );
-      let totalResult = { result, resultCount };
-      return totalResult;
-    }
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+  const resultCount = await myDataSource.query(
+    `
+        WITH
+            tables AS (SELECT
+                           wp.id                      AS id,
+                           ws.sympathy_sort           AS sympathy_sort,
+                           IFNULL(COUNT(wsc.id), '0') AS sympathy_cnt
+                       FROM
+                           Works_Sympathy ws
+                               LEFT JOIN Works_Sympathy_Count wsc ON
+                               ws.id = wsc.sympathy_id
+                               LEFT JOIN Users u ON
+                               u.id = wsc.user_id
+                               LEFT JOIN Works_Posting wp ON
+                               wsc.posting_id = wp.id
+                       WHERE
+                           wp.id = ?
+                       GROUP BY
+                           ws.sympathy_sort)
+
+        SELECT
+            a.id,
+            ws.sympathy_sort,
+            IFNULL(a.sympathy_cnt, '0') AS sympathy_cnt
+        FROM
+            Works_Sympathy ws
+                LEFT JOIN tables a ON
+                a.sympathy_sort = ws.sympathy_sort `,
+    [posting_id]
+  );
+  return { result, resultCount };
+};
+
+// 공감 수정하기
+const updateSympathy = async (posting_id, user_id, sympathy_id) => {
+  await myDataSource.query(
+    `
+      UPDATE
+        Works_Sympathy_Count
+      SET
+        sympathy_id = ?
+      WHERE
+        user_id = ?
+        AND posting_id = ?
+      `,
+    [sympathy_id, user_id, posting_id]
+  );
+  const result = await myDataSource.query(
+    `
+        SELECT
+          *
+        FROM
+          Works_Sympathy_Count wsc
+        WHERE
+          user_id = ?
+          AND posting_id = ?
+      `,
+    [user_id, posting_id]
+  );
+
+  const resultCount = await myDataSource.query(
+    `
+      WITH
+          tables AS (SELECT
+             wp.id AS id,
+             ws.sympathy_sort AS sympathy_sort,
+             IFNULL(COUNT(wsc.id), '0') AS sympathy_cnt
+         FROM
+             Works_Sympathy ws
+                 LEFT JOIN Works_Sympathy_Count wsc ON
+                 ws.id = wsc.sympathy_id
+                 LEFT JOIN Users u ON
+                 u.id = wsc.user_id
+                 LEFT JOIN Works_Posting wp ON
+                 wsc.posting_id = wp.id
+         WHERE
+             wp.id = ?
+         GROUP BY
+             ws.sympathy_sort)
+
+      SELECT
+          a.id,
+          ws.sympathy_sort,
+          IFNULL(a.sympathy_cnt, '0') AS sympathy_cnt
+      FROM
+          Works_Sympathy ws
+              LEFT JOIN tables a ON
+              a.sympathy_sort = ws.sympathy_sort
+      `,
+    [posting_id]
+  );
+  return { result, resultCount };
 };
 
 // 공감 취소
-const sympathyCancel = async (posting_id, user_id) => {
-  try {
-    const deleteSympathy = await myDataSource.query(
-      `
-    DELETE FROM Works_Sympathy_Count 
-    WHERE user_id = '${user_id}' and posting_id = '${posting_id}'
+const deleteSympathy = async (posting_id, user_id) => {
+  await myDataSource.query(
     `
-    );
-    const checkSympathy = await myDataSource.query(
-      `
-    SELECT COUNT(*) check_cnt FROM Works_Sympathy_Count wsc
-    WHERE posting_id = '${posting_id}' and user_id = '${user_id}'
+      DELETE
+      FROM
+        Works_Sympathy_Count
+      WHERE
+        user_id = ?
+        AND posting_id = ?
+    `,
+    [user_id, posting_id]
+  );
+  const checkSympathy = await myDataSource.query(
     `
-    );
-    let result = { checkSympathy };
-    return result;
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+      SELECT
+        COUNT(*) check_cnt
+      FROM
+        Works_Sympathy_Count wsc
+      WHERE
+        posting_id = ?
+        AND user_id = ?
+    `,
+    [posting_id, user_id]
+  );
+  return { checkSympathy };
 };
 
 module.exports = {
-  sympathy,
-  sympathyCancel,
+  findSympathyOfFeedByUser,
+  createSympathy,
+  updateSympathy,
+  deleteSympathy,
 };
