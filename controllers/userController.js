@@ -153,7 +153,16 @@ const test = async (req, res) => {
   // console.log(Object.values(user.created_at));
   // console.log(Object.keys(user));
   // console.log(Object.values(user));
-  console.log(JSON.stringify(user.created_at));
+  let date = new Date();
+  const userWillbeDeletedAtThisMoment = user.created_at; //실제로는 user.delete_at이 될 듯
+  const date2 = new Date(userWillbeDeletedAtThisMoment);
+  const deleteAfterThisSeconds = date2 - date;
+  setTimeout(() => {
+    console.log('정해진 시간 후에 나올 메세지');
+  }, deleteAfterThisSeconds);
+
+  console.log(deleteAfterThisSeconds);
+
   res.status(200).json({
     message: `USER INFORMATION IS BEING DISPLAYED`,
   });
