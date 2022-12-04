@@ -71,9 +71,9 @@ const findQuerySearchResult = `
   `;
 
 // 검색어 입력시 + 카테고리 설정
-const getSearchList = async (query, category_id) => {
+const getSearchList = async (query, category_name) => {
   // TODO 서비스단으로 올리기!!
-  if (!category_id) {
+  if (!category_name) {
     const resultCount = await myDataSource.query(
       `
         SELECT 
@@ -105,18 +105,20 @@ const getSearchList = async (query, category_id) => {
     // TODO AND가 제대로 안먹히는듯, 손봐야 함
     const resultCount = await myDataSource.query(
       `
-        SELECT 
-          COUNT(*) result_cnt
-        FROM 
-          Works_Posting wp  
-        WHERE 
-          wp.title LIKE CONCAT('%', ?, '%')
-          OR wp.content LIKE CONCAT('%', ?, '%')
-          AND wp.category_id = CONCAT('%', ?, '%')
-        ORDER BY 
-          wp.created_at DESC 
+          SELECT
+              COUNT(*) result_cnt
+          FROM
+              Works_Posting wp
+                  LEFT JOIN Works_Category wc
+                            ON wp.category_id = wc.id
+          WHERE
+              (wp.title LIKE CONCAT('%', ?, '%')
+                  OR wp.content LIKE CONCAT('%', ?, '%'))
+            AND wc.eng_category_name = ?
+          ORDER BY
+              wp.created_at DESC 
         `,
-      [query, query, category_id]
+      [query, query, category_name]
     );
 
     const searchResult = await myDataSource.query(
@@ -127,7 +129,7 @@ const getSearchList = async (query, category_id) => {
         ORDER BY 
           wp.created_at DESC 
       `,
-      [query, query, category_id]
+      [query, query, category_name]
     );
     return { resultCount, searchResult };
   }
