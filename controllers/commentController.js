@@ -57,14 +57,8 @@ const deleteComment = async (req, res) => {
   try {
     user_id = req.user_id;
     const { comment_id, posting_id } = req.body;
-    const commentsAfterDelete = await commentService.deleteComment(
-      user_id,
-      comment_id,
-      posting_id
-    );
-    message = 'COMMENT DELETED';
-    res.status(200).json({ message: message, deleted_comment_id: comment_id });
-    // .json({ deleted_comment_id: comment_id, data: commentsAfterDelete });
+    await commentService.deleteComment(user_id, comment_id, posting_id);
+    res.status(204).json({ message: null });
   } catch (error) {
     console.log(error.message);
     res.status(error.statusCode).json({ message: error.message });
