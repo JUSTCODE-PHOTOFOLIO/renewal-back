@@ -15,7 +15,12 @@ const feed = async id => {
   return await workDao.feed(id);
 };
 
+const deletefeed = async posting_id => {
+  await workDao.deletefeed(posting_id);
+};
+
 module.exports = {
   worksList,
   feed,
+  deletefeed,
 };

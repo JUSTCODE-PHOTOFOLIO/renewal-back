@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const { validateToken } = require('../middlewares/validateToken');
 const { asyncWrap } = require('../utils/util');
 const workController = require('../controllers/workController');
 
@@ -8,5 +8,6 @@ const workController = require('../controllers/workController');
 router.get('', asyncWrap(workController.worksList));
 router.get('/feed/:id', asyncWrap(workController.feed));
 router.get('/:sort', asyncWrap(workController.worksList)); // sort 종류 ('recommendpoint', 'sympathycnt')
+router.delete('/feed/:id', validateToken, workController.deletefeed);
 
 module.exports = router;
