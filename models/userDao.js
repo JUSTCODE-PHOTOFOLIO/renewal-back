@@ -50,7 +50,7 @@ const findDbUser = async login_id => {
   const [dbUser] = await myDataSource.query(
     `
   SELECT id, email, kor_name, password, profile_image
-    FROM Users WHERE login_id = (?)
+    FROM Users WHERE login_id = ?
     `,
     [login_id]
   );
@@ -60,7 +60,7 @@ const findDbUser = async login_id => {
 const getAccountInfo = async user_id => {
   const [userInfoById] = await myDataSource.query(
     `
-  SELECT * FROM Users WHERE id = (?);
+  SELECT * FROM Users WHERE id = ?
   `,
     [user_id]
   );
@@ -75,12 +75,21 @@ const modifyAccountInfo = async (
   nickname
 ) => {
   await myDataSource.query(
-    `UPDATE Users SET kor_name=(?), eng_name=(?), email=(?), nickname=(?) WHERE user_id=(?);`,
+    `
+    UPDATE Users 
+    SET 
+        kor_name= ?, 
+        eng_name= ?, 
+        email= ?, 
+        nickname= ? 
+    WHERE 
+        id=?;
+    `,
     [kor_name, eng_name, email, nickname, user_id]
   );
   const [userdata] = await myDataSource.query(
     `
-  SELECT * FROM Users WHERE user_id=(?);
+  SELECT * FROM Users WHERE id= ?
   `,
     [user_id]
   );
@@ -88,9 +97,24 @@ const modifyAccountInfo = async (
 };
 
 const deleteAccount = async user_id => {
-  await myDataSource.query(`SET foreign_key_checks = 0`);
-  await myDataSource.query(`DELETE FROM Users WHERE user_id=(?)`, [user_id]);
-  await myDataSource.query(`SET foreign_key_checks = 1`);
+  await myDataSource.query(
+    `
+    SET foreign_key_checks = 0
+    `
+  );
+  await myDataSource.query(
+    `
+    DELETE FROM 
+               Users 
+           WHERE id= ?
+    `,
+    [user_id]
+  );
+  await myDataSource.query(
+    `
+    SET foreign_key_checks = 1
+    `
+  );
 };
 
 // const layerConnectionTest = async () => {
