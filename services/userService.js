@@ -152,10 +152,16 @@ const deleteAccount = async user_id => {
   await userDao.deleteAccount(user_id);
 };
 
+const test = async (req, res) => {
+  const user = await userDao.test();
+  return user;
+};
+
 module.exports = {
   createUser,
   loginUser,
   getAccountInfo,
   modifyAccountInfo,
   deleteAccount,
+  test,
 };

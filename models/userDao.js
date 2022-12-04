@@ -117,9 +117,10 @@ const deleteAccount = async user_id => {
   );
 };
 
-// const layerConnectionTest = async () => {
-//   console.log('I am in userDao');
-// };
+const test = async (req, res) => {
+  const [user] = await myDataSource.query(`SELECT * FROM USERS WHERE ID = 10`);
+  return user;
+};
 
 module.exports = {
   getUserById,
@@ -129,4 +130,5 @@ module.exports = {
   getAccountInfo,
   modifyAccountInfo,
   deleteAccount,
+  test,
 };

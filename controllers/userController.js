@@ -141,10 +141,28 @@ const deleteAccount = async (req, res) => {
   console.log(`USER ${user_id}'s HAS BEEN REMOVED`);
 };
 
+const test = async (req, res) => {
+  const user = await userService.test();
+  // console.log(user);
+  // console.log(user.created_at);
+  // console.log(typeof user.created_at);
+  // console.log(typeof user);
+  // console.log(typeof user.id);
+  // console.log(typeof user.login_id);
+  // console.log(Object.keys(user.created_at));
+  // console.log(Object.values(user.created_at));
+  // console.log(Object.keys(user));
+  // console.log(Object.values(user));
+  console.log(JSON.stringify(user.created_at));
+  res.status(200).json({
+    message: `USER INFORMATION IS BEING DISPLAYED`,
+  });
+};
 module.exports = {
   createUser,
   loginUser,
   getAccountInfo,
   modifyAccountInfo,
   deleteAccount,
+  test,
 };
