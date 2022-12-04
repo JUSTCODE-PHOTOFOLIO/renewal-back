@@ -248,3 +248,5 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,visualstudiocode,node
 
 config/
+*.rtf
+formemo.js

@@ -98,4 +98,10 @@ function errorHandler(err, _1, res, _2) {
     .json({ message: responseInfo.message || '' });
 }
 
-module.exports = { morganCustomFormat, asyncWrap, errorHandler, util, upload };
+module.exports = {
+  morganCustomFormat,
+  asyncWrap,
+  errorHandler,
+  util,
+  upload,
+};

@@ -488,7 +488,75 @@ const getFeed = async id => {
   return result;
 };
 
+const deletefeed = async posting_id => {
+  // const selectedFiles = await myDataSource.query(
+  //   `SELECT upload_url FROM upload_file where posting_id =(?)`,
+  //   [posting_id]
+  // );
+
+  // let selectedFilesURLBasket = [];
+  // for (let i = 0; i < selectedFiles.length; i++) {
+  //   let filename = selectedFiles[i].upload_url.slice(59);
+  //   selectedFilesURLBasket.push(filename);
+  // }
+
+  // s3.deleteObject(
+  //   {
+  //     Bucket: 'photofolio-renewal',
+  //     Key: 'a',
+  //   },
+  //   (err, data) => {
+  //     if (err) {
+  //       throw err;
+  //     }
+  //     console.log('s3 deleteObject ', data);
+  //   }
+  // );
+
+  const tagsIdsOnSelectedPost = await myDataSource.query(
+    `SELECT tag_id FROM Works_Posting_tags wpt WHERE posting_id = (?)`,
+    [posting_id]
+  );
+  let tagIdBasket = [];
+  for (let i = 0; i < tagsIdsOnSelectedPost.length; i++) {
+    tagIdBasket.push(tagsIdsOnSelectedPost[i].tag_id);
+  }
+  let tagsShouldBeDeletedFromDB = [];
+  for (let i = 0; i < tagIdBasket.length; i++) {
+    let tagCountForDesignatedArticle = await myDataSource.query(
+      `SELECT tag_id FROM Works_Posting_tags wpt WHERE tag_id = ${tagIdBasket[i]}`
+    );
+    if (tagCountForDesignatedArticle.length < 2) {
+      tagsShouldBeDeletedFromDB.push(tagCountForDesignatedArticle);
+    }
+  }
+  await myDataSource.query(
+    `DELETE FROM Works_Posting_tags WHERE posting_id = (?)`,
+    [posting_id]
+  );
+  for (let i = 0; i < tagsShouldBeDeletedFromDB.length; i++) {
+    await myDataSource.query(
+      `DELETE FROM Works_Tag_names WHERE id = ${tagsShouldBeDeletedFromDB[i][0].tag_id}`
+    );
+  }
+  await myDataSource.query(`DELETE FROM Comment WHERE posting_id = (?)`, [
+    posting_id,
+  ]);
+  await myDataSource.query(
+    `DELETE FROM Works_Sympathy_Count WHERE posting_id = (?)`,
+    [posting_id]
+  );
+  await myDataSource.query(`SET foreign_key_checks = 0;`);
+
+  await myDataSource.query(`DELETE FROM Works_posting WHERE id = (?)`, [
+    posting_id,
+  ]);
+
+  await myDataSource.query(`SET foreign_key_checks = 1;`);
+};
+
 module.exports = {
   getWorkList,
   getFeed,
+  deletefeed,
 };
