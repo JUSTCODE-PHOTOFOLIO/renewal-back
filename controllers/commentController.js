@@ -23,10 +23,7 @@ const postComment = async (req, res) => {
       id,
       user_id
     );
-    res.status(200).json({
-      data: postedComment,
-    });
-    console.log('COMMENT POSTED');
+    res.status(201).json({ data: postedComment });
   } catch (error) {
     console.log(error.message);
     res.status(error.statusCode).json({ message: error.message });
@@ -59,10 +56,9 @@ const modifiyComment = async (req, res) => {
 const deleteComment = async (req, res) => {
   try {
     user_id = req.user_id;
-    const { comment_id } = req.body;
-    await commentService.deleteComment(user_id, comment_id);
-    res.status(200).json({ message: 'COMMENT DELETED' });
-    console.log('COMMENT DELETED');
+    const { comment_id, posting_id } = req.body;
+    await commentService.deleteComment(user_id, comment_id, posting_id);
+    res.status(204).json({ message: null });
   } catch (error) {
     console.log(error.message);
     res.status(error.statusCode).json({ message: error.message });

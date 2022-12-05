@@ -1,40 +1,40 @@
 const workDao = require('../models/workDao');
 
-// 상세페드에서 팔로우 체결유무 확인
-const followCheck = async (id, user_id) => {
-  try {
-    const result = await workDao.followCheck(id, user_id);
-    return result;
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
-};
-
 // 카테고리별 총 게시물 수 + 최신 feed list
-const worksList = async sort => {
-  try {
-    const result = await workDao.worksList(sort);
-    return result;
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+const getWorkList = async sort => {
+  // sort 종류 ('recommendpoint', 'sympathycnt')
+  const defaultOrder = 'ORDER BY wp.created_at DESC';
+  const recommendPoint = `CONCAT(b.sympathy_cnt + a.comment_cnt) recommendpoint,`;
+
+  let orderByItem = sort;
+  let isSelect = '';
+  const changeSort = sort => {
+    if (sort === 'sympathycnt') {
+      orderByItem = 'sympathy_cnt';
+    } else if (sort === 'recommendpoint') {
+      orderByItem = 'recommendpoint';
+      isSelect = recommendPoint;
+    }
+    return orderByItem;
+  };
+
+  changeSort(sort);
+
+  const sortOfOrder = sort ? `ORDER BY ${orderByItem} DESC` : defaultOrder;
+  return await workDao.getWorkList(isSelect, sortOfOrder);
 };
 
 // 지정된 피드 상세
-const feed = async id => {
-  try {
-    const result = await workDao.feed(id);
-    return result;
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+const getFeed = async id => {
+  return await workDao.getFeed(id);
+};
+
+const deletefeed = async posting_id => {
+  await workDao.deletefeed(posting_id);
 };
 
 module.exports = {
-  followCheck,
-  worksList,
-  feed,
+  getWorkList,
+  getFeed,
+  deletefeed,
 };

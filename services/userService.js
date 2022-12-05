@@ -28,7 +28,7 @@ const createUser = async (
     throw new Error('아이디는 공백 없이 입력해주세요.');
   }
 
-  const userId = await userDao.getUserByEmail(login_id);
+  const userId = await userDao.getUserById(login_id);
 
   if (userId.length !== 0) {
     throw new Error('해당 아이디가 이미 존재합니다.');
@@ -96,9 +96,12 @@ const createUser = async (
     throw new Error('해당 이메일이 이미 존재합니다.');
   }
 
+  const salt = bcrypt.genSaltSync();
+  const hashed_password = bcrypt.hashSync(password, salt);
+
   await userDao.createUserInDb(
     login_id,
-    password,
+    hashed_password,
     kor_name,
     eng_name,
     nickname,
@@ -111,21 +114,21 @@ const loginUser = async (login_id, password) => {
   const dbUser = await userDao.findDbUser(login_id);
   if (!dbUser) {
     const error = new Error('회원가입 내역이 없으시네요.');
-    error.statusCode = 404;
+    error.status = 404;
     throw error;
   }
   const pwSame = bcrypt.compareSync(password, dbUser.password);
   if (!pwSame) {
     const error = new Error('비밀번호가 다릅니다.');
-    error.statusCode = 400;
+    error.status = 400;
     throw error;
   }
   return dbUser;
 };
 
 const getAccountInfo = async user_id => {
-  const userdata = await userDao.getAccountInfo(user_id);
-  return userdata;
+  const userInfoById = await userDao.getAccountInfo(user_id);
+  return userInfoById;
 };
 
 const modifyAccountInfo = async (
@@ -148,12 +151,6 @@ const modifyAccountInfo = async (
 const deleteAccount = async user_id => {
   await userDao.deleteAccount(user_id);
 };
-
-// const layerConnectionTest = async () => {
-//   console.log('I am in userService1');
-//   await userDao.layerConnectionTest();
-//   console.log('I am in userService2');
-// };
 
 module.exports = {
   createUser,

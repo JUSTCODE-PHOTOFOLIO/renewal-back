@@ -1,62 +1,88 @@
-const { DataSource } = require('typeorm');
-const myDataSource = new DataSource({
-  type: process.env.TYPEORM_CONNECTION,
-  host: process.env.TYPEORM_HOST,
-  port: process.env.TYPEORM_PORT,
-  username: process.env.TYPEORM_USERNAME,
-  password: process.env.TYPEORM_PASSWORD,
-  database: process.env.TYPEORM_DATABASE,
-});
+const myDataSource = require('.');
 
-myDataSource.initialize();
+// feed 글쓴이와 유저와의 팔로우 관계
+const getFollowResult = async (id, user_id) => {
+  return await myDataSource
+    .query(
+      `
+      SELECT
+          EXISTS(
+                  SELECT
+                      id
+                  FROM
+                      Follow f
+                  WHERE
+                      following_id = ?
+                    AND follower_id = ?
+              ) AS success
+    `,
+      [id, user_id]
+    )
+    .then(value => {
+      const [item] = value;
+      return {
+        follow_check: item.success == 1,
+      };
+    });
+};
 
+// follow여부 확인 유닛
+const isFollow = async (following_id, user_id) => {
+  return await myDataSource
+    .query(
+      `
+      SELECT
+        count(*) AS follow_check
+      FROM
+        Follow
+      WHERE
+        following_id = ?
+        AND follower_id = ?
+    `,
+      [following_id, user_id]
+    )
+    .then(value => {
+      const [item] = value;
+      return {
+        follow_check: item.follow_check == 1,
+      };
+    });
+};
 // follow 체결 관련
-const following = async (following_id, user_id) => {
-  try {
-    const follow = await myDataSource.query(
-      `
-    INSERT into Follow (following_id, follower_id) 
-    values ('${following_id}', '${user_id}') 
+const createFollow = async (following_id, user_id) => {
+  await myDataSource.query(
     `
-    );
-    const followingResult = await myDataSource.query(
-      `
-    SELECT * from Follow f 
-    WHERE following_id = '${following_id}' and follower_id = '${user_id}'
-    `
-    );
-    let result = { followingResult };
-    return result;
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+      INSERT
+        INTO
+        Follow (following_id,
+        follower_id)
+      VALUES 
+        (?,?)
+    `,
+    [following_id, user_id]
+  );
+  return isFollow(following_id, user_id);
 };
 
 // follow 취소 관련
-const followingCancel = async (following_id, user_id) => {
-  try {
-    const deleteFollow = await myDataSource.query(
-      `
-    DELETE from Follow 
-    WHERE following_id = '${following_id}' and follower_id = '${user_id}'
+const deleteFollow = async (following_id, user_id) => {
+  await myDataSource.query(
     `
-    );
-    const deleteResult = await myDataSource.query(
-      `
-    SELECT count(*) from Follow f 
-    WHERE following_id = '${following_id}' and follower_id = '${user_id}'
-    `
-    );
-    let result = { deleteResult };
-    return result;
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+      DELETE
+      FROM
+        Follow
+      WHERE
+        following_id = ?
+        AND follower_id = ?
+    `,
+    [following_id, user_id]
+  );
+  return isFollow(following_id, user_id);
 };
 
 module.exports = {
-  following,
-  followingCancel,
+  isFollow,
+  getFollowResult,
+  createFollow,
+  deleteFollow,
 };

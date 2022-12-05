@@ -1,28 +1,30 @@
 const sympathyDao = require('../models/sympathyDao');
 
+// 피드 상세에서 로그인유저의 공감여부 확인
+const findSympathyOfFeedByUser = async (posting_id, user_id) => {
+  return await sympathyDao.findSympathyOfFeedByUser(posting_id, user_id);
+};
+
 // 공감
-const sympathy = async (posting_id, user_id, sympathy_id) => {
-  try {
-    const result = await sympathyDao.sympathy(posting_id, user_id, sympathy_id);
-    return result;
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
+const createSympathy = async (posting_id, user_id, sympathy_id) => {
+  const findSympathyOfFeedByUser = await sympathyDao.findSympathyOfFeedByUser(
+    posting_id,
+    user_id
+  );
+  if (findSympathyOfFeedByUser.checkSympathyByUser === false) {
+    return await sympathyDao.createSympathy(posting_id, user_id, sympathy_id);
+  } else {
+    return await sympathyDao.updateSympathy(posting_id, user_id, sympathy_id);
   }
 };
 
 // 공감취소
-const sympathyCancel = async (posting_id, user_id) => {
-  try {
-    const result = await sympathyDao.sympathyCancel(posting_id, user_id);
-    return result;
-  } catch (err) {
-    console.log(err);
-    res.status(err.statusCode).json({ message: err.message });
-  }
+const deleteSympathy = async (posting_id, user_id) => {
+  return await sympathyDao.deleteSympathy(posting_id, user_id);
 };
 
 module.exports = {
-  sympathy,
-  sympathyCancel,
+  findSympathyOfFeedByUser,
+  createSympathy,
+  deleteSympathy,
 };

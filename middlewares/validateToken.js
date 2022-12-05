@@ -1,24 +1,16 @@
 const jwt = require('jsonwebtoken');
-const { DataSource } = require('typeorm');
 
-const myDataSource = new DataSource({
-  type: process.env.TYPEORM_CONNECTION,
-  host: process.env.TYPEORM_HOST,
-  port: process.env.TYPEORM_PORT,
-  username: process.env.TYPEORM_USERNAME,
-  password: process.env.TYPEORM_PASSWORD,
-  database: process.env.TYPEORM_DATABASE,
-});
-
-myDataSource.initialize();
-
-const validateToken = (req, res, next) => {
+const validateToken = async (req, res, next) => {
   // 인증 완료
   try {
     // 요청 헤더에 저장된 토큰(req.headers.authorization)과 비밀키를 사용하여 토큰을 req.decoded에 반환
-    const verifiedToken = jwt.verify(req.headers.token, process.env.SECRET_KEY);
-    const user_id = verifiedToken.id;
-    req.user_id = user_id;
+    let token = req.headers.authorization;
+    if (!token) {
+      throw { status: 401, message: `TOKEN IS NOT EXISTS` };
+    }
+    token = token.includes('Bearer') ? token.replace(/^Bearer\s+/, '') : token;
+    const verifiedToken = jwt.verify(token, process.env.SECRET_KEY);
+    req.user_id = verifiedToken.id;
     next();
   } catch (error) {
     // 인증 실패
@@ -36,9 +28,9 @@ const validateToken = (req, res, next) => {
         message: '유효하지 않은 토큰입니다.',
       });
     }
+
+    res.status(error.status).json({ message: error.message });
   }
 };
 
-module.exports = {
-  validateToken,
-};
+module.exports = { validateToken };

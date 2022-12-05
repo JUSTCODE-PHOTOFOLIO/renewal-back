@@ -1,11 +1,24 @@
 const express = require('express');
 const router = express.Router();
 
-// 토큰이 필요할시,
+const { asyncWrap } = require('../utils/util');
 const { validateToken } = require('../middlewares/validateToken');
 const sympathyController = require('../controllers/sympathyController');
 
-router.post('', validateToken, sympathyController.sympathy); // 공감, 토큰 필요
-router.delete('', validateToken, sympathyController.sympathyCancel); // 공감취소, 토큰 필요
+router.get(
+  '/:id',
+  asyncWrap(validateToken),
+  asyncWrap(sympathyController.findSympathyOfFeedByUser)
+);
+router.post(
+  '',
+  asyncWrap(validateToken),
+  asyncWrap(sympathyController.createSympathy)
+);
+router.delete(
+  '',
+  asyncWrap(validateToken),
+  asyncWrap(sympathyController.deleteSympathy)
+);
 
 module.exports = router;
