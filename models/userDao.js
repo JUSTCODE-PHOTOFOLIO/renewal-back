@@ -97,29 +97,66 @@ const modifyAccountInfo = async (
 };
 
 const deleteAccount = async user_id => {
-  await myDataSource.query(
-    `
-    SET foreign_key_checks = 0
-    `
+  await myDataSource.query(`SET foreign_key_checks=0`);
+  let feedsBasket = [];
+  const feedsWrittenByUser = await myDataSource.query(
+    `SELECT id FROM Works_posting WHERE user_id = (?)`,
+    [user_id]
   );
+  for (let i = 0; i < feedsWrittenByUser.length; i++) {
+    feedsBasket.push(feedsWrittenByUser[i]);
+  }
+  for (let i = 0; i < feedsBasket.length; i++) {
+    const tagsIdsOnSelectedPost = await myDataSource.query(
+      `SELECT tag_id FROM Works_Posting_tags wpt WHERE posting_id = (?)`, //<---sql
+      [feedsBasket[i].id]
+    );
+    let tagIdBasket = [];
+    for (let j = 0; j < tagsIdsOnSelectedPost.length; j++) {
+      tagIdBasket.push(tagsIdsOnSelectedPost[j].tag_id);
+    }
+    let tagsShouldBeDeletedFromDB = [];
+    for (let j = 0; j < tagIdBasket.length; j++) {
+      let tagCountForDesignatedArticle = await myDataSource.query(
+        `SELECT tag_id FROM Works_Posting_tags wpt WHERE tag_id = ${tagIdBasket[j]}`
+      );
+      if (tagCountForDesignatedArticle.length < 2) {
+        tagsShouldBeDeletedFromDB.push(tagCountForDesignatedArticle);
+      }
+    }
+    await myDataSource.query(
+      `DELETE FROM Works_Posting_tags WHERE posting_id = (?)`,
+      [feedsBasket[i].id]
+    );
+    for (let j = 0; j < tagsShouldBeDeletedFromDB.length; j++) {
+      await myDataSource.query(
+        `DELETE FROM Works_Tag_names WHERE id = ${tagsShouldBeDeletedFromDB[j][0].tag_id}`
+      );
+    }
+    await myDataSource.query(`DELETE FROM Comment WHERE posting_id = (?)`, [
+      feedsBasket[i].id,
+    ]);
+    await myDataSource.query(
+      `DELETE FROM Works_Sympathy_Count WHERE posting_id = (?)`,
+      [feedsBasket[i].id]
+    );
+    await myDataSource.query(`DELETE FROM upload_file WHERE posting_id = (?)`, [
+      feedsBasket[i].id,
+    ]);
+    await myDataSource.query(`DELETE FROM Works_posting WHERE id = (?)`, [
+      feedsBasket[i].id,
+    ]);
+  }
   await myDataSource.query(
     `
-    DELETE FROM 
-               Users 
+    DELETE FROM
+               Users
            WHERE id= ?
     `,
     [user_id]
   );
-  await myDataSource.query(
-    `
-    SET foreign_key_checks = 1
-    `
-  );
+  await myDataSource.query(`SET foreign_key_checks=1`);
 };
-
-// const layerConnectionTest = async () => {
-//   console.log('I am in userDao');
-// };
 
 module.exports = {
   getUserById,

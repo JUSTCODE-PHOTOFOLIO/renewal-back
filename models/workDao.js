@@ -1,6 +1,6 @@
 const myDataSource = require('.');
-
 // 카테고리별 총 게시물 수 + 최신 feed list
+
 const findQueryCatagorySortCountList = `
     SELECT 
       wc.id, 
@@ -514,7 +514,7 @@ const deletefeed = async posting_id => {
   // );
 
   const tagsIdsOnSelectedPost = await myDataSource.query(
-    `SELECT tag_id FROM Works_Posting_tags wpt WHERE posting_id = (?)`,
+    `SELECT tag_id FROM Works_Posting_tags wpt WHERE posting_id = (?)`, //<---sql
     [posting_id]
   );
   let tagIdBasket = [];
@@ -546,13 +546,12 @@ const deletefeed = async posting_id => {
     `DELETE FROM Works_Sympathy_Count WHERE posting_id = (?)`,
     [posting_id]
   );
-  await myDataSource.query(`SET foreign_key_checks = 0;`);
-
+  await myDataSource.query(`DELETE FROM upload_file WHERE posting_id = (?)`, [
+    posting_id,
+  ]);
   await myDataSource.query(`DELETE FROM Works_posting WHERE id = (?)`, [
     posting_id,
   ]);
-
-  await myDataSource.query(`SET foreign_key_checks = 1;`);
 };
 
 module.exports = {

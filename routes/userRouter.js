@@ -35,7 +35,4 @@ router.delete(
   asyncWrap(userController.deleteAccount)
 );
 
-// 업로드 관련 뭔가가 빠진듯 서버 안돌아가서 주석처리
-// router.get('/test', userController.layerConnectionTest);
-
 module.exports = router;
