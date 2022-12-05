@@ -71,87 +71,72 @@ const findQuerySearchResult = `
             b.id = wp.id
             LEFT JOIN Works_Category wc ON
             wp.category_id = wc.id
-            LEFT JOIN Works_Posting_tags wpt ON
-            wp.id = wpt.posting_id
-            LEFT JOIN Works_tag_names wtn ON
-            wpt.tag_id = wtn.id
   `;
 
+// TODO Tag 검색기능 다시 추가하기
 // 검색어 입력시 + 카테고리 설정
-const getSearchList = async (query, category_name) => {
-  // TODO 서비스단으로 올리기!!
-  if (!category_name) {
-    const resultCount = await myDataSource.query(
-      `
-      SELECT
-          COUNT(*) result_cnt
-      FROM
-          Works_Posting wp
-              LEFT JOIN Works_Posting_tags wpt
-                        ON wp.id = wpt.posting_id
-              LEFT JOIN Works_tag_names wtn
-                        ON wpt.tag_id = wtn.id
-      WHERE
-          wp.title LIKE CONCAT('%', ?, '%')
-        OR wp.content LIKE CONCAT('%', ?, '%')
-        OR wtn.name LIKE CONCAT('%', ?, '%') 
-        `,
-      [query, query, query]
-    );
+const getSearchList = async query => {
+  const resultCount = await myDataSource.query(
+    `
+        SELECT
+            COUNT(*) result_cnt
+        FROM
+            Works_Posting wp
+        WHERE
+            wp.title LIKE CONCAT('%', ?, '%')
+          OR wp.content LIKE CONCAT('%', ?, '%')
+    `,
+    [query, query]
+  );
 
-    const searchResult = await myDataSource.query(
-      `
+  const searchResult = await myDataSource.query(
+    `
        ${findQuerySearchResult}
         WHERE 
           wp.title LIKE CONCAT('%', ?, '%') 
             OR wp.content LIKE CONCAT('%', ?, '%')
-            OR wtn.name LIKE CONCAT('%', ?, '%')
         ORDER BY 
           wp.created_at DESC 
         `,
-      [query, query, query]
-    );
-    return { resultCount, searchResult };
-  } else {
-    // TODO AND가 제대로 안먹히는듯, 손봐야 함
-    const resultCount = await myDataSource.query(
-      `
+    [query, query]
+  );
+  return { resultCount, searchResult };
+};
+
+const getSearchListWithCategory = async (query, category_name) => {
+  const resultCount = await myDataSource.query(
+    `
           SELECT
               COUNT(*) result_cnt
           FROM
               Works_Posting wp
                   LEFT JOIN Works_Category wc
                             ON wp.category_id = wc.id
-                  LEFT JOIN Works_Posting_tags wpt
-                            ON wp.id = wpt.posting_id
-                  LEFT JOIN Works_tag_names wtn
-                            ON wpt.tag_id = wtn.id
           WHERE
               (wp.title LIKE CONCAT('%', ?, '%')
                   OR wp.content LIKE CONCAT('%', ?, '%')
-                  OR wtn.name LIKE CONCAT('%', ?, '%'))
+                  )
             AND wc.eng_category_name = ?
           ORDER BY
               wp.created_at DESC
         `,
-      [query, query, query, category_name]
-    );
+    [query, query, category_name]
+  );
 
-    const searchResult = await myDataSource.query(
-      `
+  const searchResult = await myDataSource.query(
+    `
         ${findQuerySearchResult}
         WHERE 
           (wp.title LIKE CONCAT('%', ?, '%') 
               OR wp.content LIKE CONCAT('%', ?, '%')
-              OR wtn.name LIKE CONCAT('%', ?, '%'))
+          )
              AND wc.eng_category_name = ?
         ORDER BY 
           wp.created_at DESC 
       `,
-      [query, query, query, category_name]
-    );
-    return { resultCount, searchResult };
-  }
+    [query, query, category_name]
+  );
+  return { resultCount, searchResult };
 };
 
-module.exports = { getSearchList };
+module.exports = { getSearchList, getSearchListWithCategory };
